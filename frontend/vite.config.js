@@ -13,6 +13,7 @@ const backend = process.env.API_TARGET || 'http://127.0.0.1:3000'
 // presenting the expected Origin here covers the ones that don't send it. Match your .env if you
 // changed ORIGIN: API_ORIGIN=https://gym.example.com npm run dev
 const apiOrigin = process.env.API_ORIGIN || 'http://localhost:8080'
+const appOrigins = new Set(['capacitor://localhost', 'https://localhost', 'http://localhost'])
 // Exercise media: served straight from catalogue/media in dev (see catalogueMedia below), or
 // proxied to a server of your choice with MEDIA_TARGET.
 const media = process.env.MEDIA_TARGET
@@ -109,8 +110,21 @@ export default defineConfig({
     // and is imported by the phone build. vite build and vitest already reach it; the dev
     // server needs to be told the workspace is wider than frontend/.
     fs: { allow: ['..'] },
+    // Let /api OPTIONS reach the API: it supplies the app's CORS and Private Network Access
+    // headers. Vite's own CORS middleware would answer the preflight before the proxy sees it.
+    cors: false,
     proxy: {
-      '/api': { target: backend, changeOrigin: true, headers: { Origin: apiOrigin } },
+      '/api': {
+        target: backend,
+        changeOrigin: true,
+        configure(proxy) {
+          proxy.on('proxyReq', (proxyReq, req) => {
+            // The browser dev page may need the configured API origin for the CSRF fallback.
+            // Preserve a paired phone's WebView Origin so the API can echo it for CORS.
+            if (!appOrigins.has(req.headers.origin)) proxyReq.setHeader('Origin', apiOrigin)
+          })
+        }
+      },
       ...(media ? {
         '/exercise-media': { target: media, changeOrigin: true }
       } : {})
