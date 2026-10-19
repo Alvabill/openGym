@@ -65,6 +65,7 @@ const PROVIDERS = [
   { id: 'openai', label: 'OpenAI', runtime: false, setupToken: false, deviceLogin: false, apiKey: true, http: true, baseUrl: false, keyOptional: false, keyPlaceholder: 'sk-…', defaultModel: 'gpt-4o', connected: false },
   { id: 'compatible', label: 'OpenAI-compatible', runtime: false, setupToken: false, deviceLogin: false, apiKey: true, http: true, baseUrl: true, keyOptional: true, keyPlaceholder: null, defaultModel: null, connected: false },
   { id: 'claude', label: 'Claude Code', runtime: true, setupToken: true, deviceLogin: false, apiKey: false, http: false, baseUrl: false, keyOptional: false, keyPlaceholder: null, defaultModel: null, connected: false },
+  { id: 'codex-gateway', label: 'Codex CLI (custom gateway)', runtime: true, setupToken: false, deviceLogin: false, apiKey: true, http: false, baseUrl: true, keyOptional: false, keyPlaceholder: 'gateway key', defaultModel: null, connected: false },
   { id: 'fixture', label: 'Built-in fixture', runtime: false, setupToken: false, deviceLogin: false, apiKey: false, http: false, baseUrl: false, keyOptional: false, keyPlaceholder: null, defaultModel: null, connected: false },
 ]
 
@@ -314,6 +315,17 @@ describe('AdminCoach — the connection test', () => {
     expect(result.textContent).toContain('401 invalid x-api-key')
   })
 
+  it('points a compatible model version rejection to the real Codex CLI gateway provider', async () => {
+    mocks.routes['/api/admin/coach'] = status({ provider: 'compatible', baseUrl: 'https://gateway.example.com', model: 'gpt-6.1-sol', auth: { state: 'connected', type: 'apikey' } })
+    mocks.routes['/api/admin/coach/test'] = { ok: false, error: '400 model_client_version_rejected · a valid Version request header or native Codex User-Agent is required for gpt-6.1-sol' }
+    await mount()
+    await tap(btn('Test the Coach'))
+    const result = host.querySelector('.adm-result')
+    expect(result.textContent).toContain('model_client_version_rejected')
+    expect(result.textContent).toContain('Choose Codex CLI (custom gateway)')
+    expect(chip('Codex CLI (custom gateway)')).toBeTruthy()
+  })
+
   it('a thrown request (proxy timeout, 502) is reported inline too, not swallowed', async () => {
     mocks.routes['/api/admin/coach/test'] = new Error('HTTP 502')
     await mount()
@@ -343,6 +355,16 @@ describe('AdminCoach — the connection test', () => {
 })
 
 describe('AdminCoach — endpoint', () => {
+  it('shows the full Responses API URL and dedicated key field for a Codex CLI gateway', async () => {
+    mocks.routes['/api/admin/coach'] = status({ provider: 'codex-gateway', baseUrl: null, model: null, auth: { state: 'none' }, runtime: { ok: true, version: 'codex-cli 0.163.0' } })
+    await mount()
+    expect(host.textContent).toContain("Codex's Responses API")
+    expect(host.querySelector('input[placeholder="https://gateway.example.com/v1"]')).toBeTruthy()
+    expect(host.textContent).not.toContain('Extra headers (optional)')
+    expect(btn('Add API key')).toBeTruthy()
+    expect(btn('Test the Coach').disabled).toBe(true)
+  })
+
   it('a changed base URL is written on blur; an unchanged one writes nothing', async () => {
     mocks.routes['/api/admin/coach'] = status({ provider: 'compatible', baseUrl: 'http://ollama:11434', model: null, auth: { state: 'optional' } })
     await mount()

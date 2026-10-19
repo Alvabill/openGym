@@ -181,5 +181,18 @@ export function jobErrorText(cls, detail) {
   const own = LOCAL()
   const base = (own && BYOK_ERRORS[cls]) || JOB_ERRORS[cls] || (own ? BYOK_ERRORS.internal : JOB_ERRORS.internal)
   const why = own && detail ? String(detail).trim().slice(0, 300) : ''
-  return why ? `${base}\n${why}` : base
+  if (!why) return base
+  // A compatible gateway can gate a model on its own Version header or a native Codex
+  // client. The gateway owns that header's name and value; this app cannot safely guess
+  // them or impersonate Codex. Keep its exact refusal visible alongside the next step.
+  const versionGate = own && useStore.getState().coachLocal?.provider === 'compatible' && cls === 'provider'
+    && /model_client_version_rejected|\bvalid\s+Version\s+request\s+header\b[\s\S]*\bnative\s+Codex\s+User-Agent\b/i.test(why)
+  if (!versionGate) return `${base}\n${why}`
+  const lang = getLang()
+  const hint = lang === 'zh'
+    ? '这个兼容服务要求版本请求头或原生 Codex 客户端。若管理员提供了请求头名称和值，可在“设置 → AI 教练”的额外请求头中填写；否则请使用自托管服务的 Codex CLI 网关，或换用该网关支持的其他模型。'
+    : lang === 'zh-TW'
+      ? '這個相容服務要求版本請求標頭或原生 Codex 用戶端。若管理員提供標頭名稱和值，可在「設定 → AI 教練」的額外請求標頭中填寫；否則請使用自架服務的 Codex CLI 閘道，或改用該閘道支援的其他模型。'
+      : 'This gateway requires a version request header or the native Codex client. If its administrator provides the exact header name and value, add them under Settings → AI Coach → Extra headers. Otherwise use a self-hosted Codex CLI gateway or another model this gateway supports.'
+  return `${base}\n${why}\n${hint}`
 }

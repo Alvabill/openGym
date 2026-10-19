@@ -1,6 +1,6 @@
 {
   "id": "4992",
-  "name": "opposite crunch",
+  "name": "vertical leg toe-reach crunch",
   "bodyPart": "waist",
   "equipment": "body weight",
   "target": "abs",
@@ -9,13 +9,12 @@
     "hip flexors"
   ],
   "category": "calisthenics",
-  "description": "Crunch where opposite arm and leg move toward each other. It hits the abs and obliques together.",
+  "description": "A supine crunch with both legs raised and the arms reaching toward the toes, focusing on the abs.",
   "instructions": [
-    "Lie on your back with hands lightly behind your head.",
-    "Lift one leg bent while curling your torso up.",
-    "Bring the opposite elbow toward the raised knee.",
-    "Lower slowly with control.",
-    "Alternate sides on each rep."
+    "Lie on your back and raise both legs together toward the ceiling.",
+    "Extend your arms toward your feet and brace your abdomen.",
+    "Curl your shoulders off the floor and reach toward your toes without jerking your neck.",
+    "Lower your shoulders slowly while keeping the legs controlled."
   ],
   "textSource": "opengym"
 }

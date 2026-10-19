@@ -459,6 +459,10 @@ export async function testRun() {
   const cfg = cfgStore.load();
   const adapter = adapterFor(cfg.provider);
   if (!adapter) return { ok: false, error: 'no provider configured' };
+  if (adapter.spawns !== false) {
+    const priv = canDropPrivileges();
+    if (!priv.ok) return { ok: false, error: `Coach jobs are disabled: ${priv.why}` };
+  }
   const jobDir = adapter.spawns === false ? null : fs.mkdtempSync(path.join(os.tmpdir(), 'coach-test-'));
   try {
     // No user asked for this, so there is no profile whose account is being spent. In instance

@@ -13,11 +13,10 @@
   "category": "strength",
   "description": "A deadlift variation with a two-thirds range of motion. It is a good way to drill the lower, hardest part of the lift.",
   "instructions": [
-    "Stand with your feet hip width and the bar over your mid foot.",
-    "Grip the bar, brace your core, and keep your back flat.",
-    "Push the floor away and stand up.",
-    "Lower the bar back toward the floor under control.",
-    "Reset each rep and keep your back neutral."
+    "Stand with your feet hip-width apart and the bar over your midfoot.",
+    "Grip the bar, brace your core, and set your back in a neutral position.",
+    "Push the floor away and lift the bar through roughly the lower two-thirds of a normal deadlift, stopping before full lockout.",
+    "Lower the bar to the floor under control and reset before the next rep."
   ],
   "textSource": "opengym"
 }

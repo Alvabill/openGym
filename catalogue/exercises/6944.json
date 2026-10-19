@@ -11,13 +11,12 @@
     "triceps"
   ],
   "category": "cardio",
-  "description": "A standing or floor drill that copies the front crawl arm stroke. It raises your heart rate and warms the shoulders.",
+  "description": "A prone floor drill that imitates the alternating arm strokes of front-crawl swimming. It warms the shoulders and upper back.",
   "instructions": [
-    "Stand with feet shoulder-width apart and knees slightly bent.",
-    "Swing one arm forward and over in a crawl stroke.",
-    "Alternate arms in a smooth, continuous rhythm.",
-    "Rotate your torso slightly with each stroke.",
-    "Keep going at a steady pace for 30-60 seconds."
+    "Lie face down with your legs extended and your arms reaching forward.",
+    "Lift your chest and arms slightly off the floor without straining your lower back.",
+    "Sweep one arm down and back as the other reaches forward, then alternate in a smooth front-crawl rhythm.",
+    "Let your torso rotate slightly with each stroke and breathe steadily for the set time."
   ],
   "textSource": "opengym"
 }

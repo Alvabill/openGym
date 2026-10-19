@@ -1,21 +1,20 @@
 // Capturing a gym check-in code (see views/CheckIn.jsx). Three ways in:
 //   1. type it            — no plugin, handled entirely in the view
 //   2. import a photo      — importCodeFromImage(file): decode a picture the user already has
-//   3. scan with camera    — scanCode(): live camera via ML Kit's own scanner UI (app build);
-//                            in a browser the view opens components/CameraScan.jsx instead
+//   3. scan with camera    — Android uses ML Kit's native UI; iOS and browsers use
+//                            components/CameraScan.jsx
 //
-// The app build (MOBILE) decodes with @capacitor-mlkit/barcode-scanning (Apache-2.0, see
-// NOTICE.md), dynamic-imported so it never lands in the web bundle. In a browser — the PWA on a
-// phone is the common case — photo import goes through lib/scan-web.js (BarcodeDetector where the
-// browser has one, jsQR otherwise). scanCode() itself is app-only: ML Kit brings its own camera
-// UI, the browser path is a React sheet and lives with the view.
+// Android decodes with @capacitor-mlkit/barcode-scanning (Apache-2.0, see NOTICE.md),
+// dynamic-imported so it never lands in the web bundle. iOS and browser photo imports use
+// lib/scan-web.js (BarcodeDetector where available, jsQR otherwise). Apple's ML Kit CocoaPods
+// binaries exclude simulator arm64, so the iOS native build omits that plugin entirely.
 //
 // What comes back is a normalized { value, fmt } (or null when the user cancels / nothing was
 // found). `value` is the code's machine-readable content; `fmt` is a lower-cased symbology token
 // matching lib/qr.js's normalizeFmt. The caller checks canRenderFmt(fmt) before saving — we can
 // read many barcode kinds but only redraw QR, so a non-QR code is reported and refused there, not
 // silently stored.
-import { MOBILE } from './mobile.js'
+import { MOBILE, isAndroid } from './mobile.js'
 import { normalizeFmt } from './qr.js'
 
 // A found barcode from either path → our stored shape. mlkit gives rawValue (machine-readable,
@@ -27,10 +26,8 @@ function toCode(barcode) {
   return { value, fmt: normalizeFmt(barcode.format) }
 }
 
-// Live camera scan. On Android this opens Google's own full-screen scanner UI (no camera view we
-// have to host); on iOS the plugin's native scanner. Returns the first barcode found, or null if
-// the user backed out without scanning. Throws if scanning isn't supported or permission is hard-
-// denied so the caller can explain why.
+// Android-only live camera scan: opens Google's own full-screen scanner UI. iOS and browsers
+// open the CameraScan sheet instead. Returns the first barcode found, or null if cancelled.
 export async function scanCode() {
   if (!MOBILE) throw new Error('Scanning is only available in the app')
   const { BarcodeScanner } = await import('@capacitor-mlkit/barcode-scanning')
@@ -48,10 +45,11 @@ export async function scanCode() {
 // Decode a barcode out of an image the user picked. mlkit's readBarcodesFromImage wants a local
 // file PATH, and a browser <input type=file> only hands us a File/blob — so we bounce the bytes
 // through the app's cache dir (reusing @capacitor/filesystem, already a dependency) to get a real
-// path, decode, then delete the temp file. Returns the first barcode, or null if none was found.
+// path, decode, then delete the temp file. iOS and browsers use the JS decoder directly.
+// Returns the first barcode, or null if none was found.
 export async function importCodeFromImage(file) {
   if (!file) return null
-  if (!MOBILE) return (await import('./scan-web.js')).importCodeFromImageWeb(file)
+  if (!MOBILE || !(await isAndroid())) return (await import('./scan-web.js')).importCodeFromImageWeb(file)
   const { BarcodeScanner } = await import('@capacitor-mlkit/barcode-scanning')
   const { Filesystem, Directory } = await import('@capacitor/filesystem')
 

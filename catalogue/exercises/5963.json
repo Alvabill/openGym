@@ -1,6 +1,6 @@
 {
   "id": "5963",
-  "name": "vertical sit up",
+  "name": "inverted sit-up on apparatus",
   "bodyPart": "waist",
   "equipment": "body weight",
   "target": "abs",
@@ -9,13 +9,12 @@
     "obliques"
   ],
   "category": "calisthenics",
-  "description": "A sit-up performed with the legs raised vertically, which keeps the focus on the abs by taking the hip flexors out of the pull.",
+  "description": "A sit-up performed while hanging head-down with the feet secured on an inversion apparatus, challenging the abs.",
   "instructions": [
-    "Lie on your back with your legs raised straight toward the ceiling.",
-    "Place your hands behind your head or across your chest.",
-    "Curl your torso up and reach toward your feet.",
-    "Pause at the top.",
-    "Lower your upper body slowly to the floor."
+    "Secure your feet and ankles on a suitable inversion apparatus and make sure you can hang steadily head-down.",
+    "Cross your arms over your chest or place your hands lightly near your head.",
+    "Pause briefly near the top without jerking your neck.",
+    "Curl your trunk toward your legs without swinging, then lower slowly to the hanging position."
   ],
   "textSource": "opengym"
 }

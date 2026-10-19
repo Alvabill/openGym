@@ -1,6 +1,6 @@
 {
   "id": "0718",
-  "name": "side sit up",
+  "name": "side-lying sit-up",
   "bodyPart": "waist",
   "equipment": "body weight",
   "target": "abs",
@@ -10,14 +10,12 @@
     "hip flexors"
   ],
   "category": "calisthenics",
-  "description": "A sit-up performed with a sideways angle. It emphasizes the obliques.",
+  "description": "A side-lying trunk curl that brings the upper shoulder toward the hip to work the obliques.",
   "instructions": [
-    "Lie on your back with knees bent.",
-    "Place your hands behind your head.",
-    "Sit up while reaching one elbow toward the opposite knee.",
-    "Lower slowly.",
-    "Keep your feet planted.",
-    "Alternate sides."
+    "Lie on one side with your legs long and your lower arm resting on the floor for support.",
+    "Place your upper hand lightly behind your head without pulling on your neck.",
+    "Curl the side of your trunk, bringing your upper shoulder toward your hip.",
+    "Lower slowly, complete the reps, then switch sides."
   ],
   "textSource": "opengym"
 }

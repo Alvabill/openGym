@@ -1,6 +1,6 @@
 {
   "id": "3330",
-  "name": "oblique crunches with bent knee leg lift",
+  "name": "side-lying oblique crunch with bent-knee lift",
   "bodyPart": "waist",
   "equipment": "body weight",
   "target": "abs",
@@ -10,13 +10,12 @@
     "hip flexors"
   ],
   "category": "calisthenics",
-  "description": "A side crunch combined with a bent knee lift. It trains the obliques and lower abs together.",
+  "description": "A side-lying crunch that draws a bent knee toward the upper elbow, working the obliques.",
   "instructions": [
-    "Lie on your back with your hands by your head and knees bent.",
-    "Lift your shoulders and knees at the same time.",
-    "Twist and bring one elbow toward the opposite knee.",
-    "Hold briefly, then lower with control.",
-    "Alternate sides through the set."
+    "Lie on one side and support yourself with the lower arm on the floor.",
+    "Place your upper hand lightly behind your head and bend your upper knee.",
+    "Curl your upper shoulder toward the bent knee as you lift the knee slightly.",
+    "Lower slowly, finish the reps and switch sides without pulling on your neck."
   ],
   "textSource": "opengym"
 }

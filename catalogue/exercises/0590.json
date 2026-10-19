@@ -1,6 +1,6 @@
 {
   "id": "0590",
-  "name": "lever one arm shoulder press",
+  "name": "standing lever one arm shoulder press",
   "bodyPart": "shoulders",
   "equipment": "leverage machine",
   "target": "delts",
@@ -9,13 +9,12 @@
     "upper back"
   ],
   "category": "strength",
-  "description": "Seated on a machine, you press one handle overhead at a time. Trains each shoulder separately with help from the triceps.",
+  "description": "A standing single-arm shoulder press using a guided lever, with the handle traveling up and forward from the shoulder.",
   "instructions": [
-    "Adjust the seat height and position yourself on the machine with your back against the pad.",
-    "Grasp the lever handle with one hand and position your elbow at a 90-degree angle.",
-    "Press the lever upward until your arm is fully extended overhead.",
-    "Pause for a moment at the top, then slowly lower the lever back down to the starting position.",
-    "Repeat for the desired number of repetitions, then switch to the other arm."
+    "Stand at the lever machine with your feet planted and take one handle near shoulder height.",
+    "Brace your trunk and press the handle upward and slightly forward until the working arm is nearly straight.",
+    "Lower the handle slowly to shoulder height without leaning back.",
+    "Complete your reps, then switch arms."
   ],
   "muscleMap": {
     "primaries": [

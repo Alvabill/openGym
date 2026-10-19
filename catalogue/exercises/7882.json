@@ -10,14 +10,12 @@
     "core"
   ],
   "category": "plyometrics",
-  "description": "An explosive push of a weight plate out from your chest for upper-body power.",
+  "description": "A kneeling floor push of a weight plate that trains upper-body pushing power and core control.",
   "instructions": [
-    "Stand with a weight plate held at your chest, elbows bent.",
-    "Brace your abs and bend your knees slightly.",
-    "Push the plate out explosively with both arms.",
-    "Fully extend your arms.",
-    "Pull the plate back to your chest with control.",
-    "Repeat for the planned reps."
+    "Kneel on the floor with a weight plate just in front of your hands.",
+    "Brace your core and place both palms on the plate.",
+    "Push the plate forward along the floor with a quick, controlled effort while keeping your hips steady.",
+    "Bring the plate back to the start and repeat."
   ],
   "textSource": "opengym"
 }

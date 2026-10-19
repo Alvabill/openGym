@@ -1,6 +1,6 @@
 {
   "id": "0631",
-  "name": "muscle up",
+  "name": "ring muscle-up",
   "bodyPart": "back",
   "equipment": "body weight",
   "target": "lats",
@@ -11,14 +11,12 @@
     "chest"
   ],
   "category": "calisthenics",
-  "description": "You pull yourself above a bar and then press up into a dip position. Trains the lats, chest and arms in a powerful transition.",
+  "description": "A ring muscle-up that links a pull from the hang, a transition through the rings and a press to straight-arm support.",
   "instructions": [
-    "Start by hanging from a pull-up bar with your palms facing away from you and your arms fully extended.",
-    "Engage your core and pull your body up towards the bar, leading with your chest.",
-    "As you reach the top of the movement, transition your grip so that your palms are facing towards you.",
-    "Continue pulling yourself up until your chest is above the bar and your arms are fully flexed.",
-    "Reverse the movement by slowly lowering yourself back down to the starting position.",
-    "Repeat for the desired number of repetitions."
+    "Hang from two rings with a secure grip and straight arms.",
+    "Pull the rings toward your chest while keeping them close to your body.",
+    "Lean your chest forward between the rings and bring your elbows above your hands to enter the dip position.",
+    "Press down on the rings to straight-arm support, then lower through the same path with control."
   ],
   "textSource": "exercisedb"
 }

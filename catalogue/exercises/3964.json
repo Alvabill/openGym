@@ -12,11 +12,10 @@
   "category": "calisthenics",
   "description": "A push up with a rotation at the top. It trains the chest and arms and adds core work.",
   "instructions": [
-    "Start in a high plank with hands under your shoulders.",
-    "Lower your chest to the floor.",
-    "Push up and rotate one arm toward the ceiling.",
-    "Return the hand to the floor.",
-    "Alternate sides each rep."
+    "Set one hand on a sturdy bench and the other on the floor, then step back into a plank with your hips level.",
+    "Bend both elbows to lower your chest between the two supports.",
+    "Press up and rotate your upper body toward the bench side, reaching that arm upward only as far as you can control.",
+    "Return the hand to the bench, complete the set, then switch sides."
   ],
   "textSource": "opengym"
 }

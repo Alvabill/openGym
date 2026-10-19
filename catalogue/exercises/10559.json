@@ -11,13 +11,12 @@
     "forearms"
   ],
   "category": "strength",
-  "description": "Raise a dumbbell in front of you all the way overhead and catch it with control. It trains the front shoulder.",
+  "description": "A single-arm full-range front raise, bringing one dumbbell from the side of the thigh to overhead under control.",
   "instructions": [
-    "Stand tall holding a dumbbell with both hands in front of your thighs.",
-    "Raise it straight up in front of you to overhead.",
-    "Control it at the top and keep your core braced.",
-    "Lower it slowly back down.",
-    "Use a moderate weight and avoid arching your back."
+    "Stand tall with one light dumbbell at your side and your free hand relaxed.",
+    "Keep your trunk steady and raise the dumbbell forward in an arc toward overhead.",
+    "Control the dumbbell at the top without leaning back.",
+    "Lower it slowly along the same path, then switch arms after the set."
   ],
   "textSource": "opengym"
 }

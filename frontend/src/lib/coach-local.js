@@ -50,7 +50,11 @@ export function setNotifier(fn) { notify = fn }
 
 /* ---------- what this phone is configured with ---------- */
 
-const cfgOf = d => ({ provider: d.provider, providerOptions: d.baseUrl ? { [d.provider]: { baseUrl: d.baseUrl } } : {} })
+// Extra routing headers are available only for a compatible endpoint. A saved provider switch
+// must never carry that endpoint's headers to OpenAI, Anthropic or Gemini.
+const cfgOf = d => ({ provider: d.provider, providerOptions: d.provider === 'compatible'
+  ? { compatible: { baseUrl: d.baseUrl, headers: d.headers || null } }
+  : {} })
 const envOf = (d, key) => (key ? { [HTTP_PROVIDERS[d.provider].apiKeyEnv]: key } : {})
 
 function mintHandle() {

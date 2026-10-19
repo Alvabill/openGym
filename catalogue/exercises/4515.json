@@ -1,6 +1,6 @@
 {
   "id": "4515",
-  "name": "back pec stretch v. 2",
+  "name": "bench-supported chest stretch",
   "bodyPart": "chest",
   "equipment": "body weight",
   "target": "pectorals",
@@ -9,14 +9,12 @@
     "upper chest"
   ],
   "category": "stretching",
-  "description": "A back-clasped chest opener that lengthens the pecs and the front of the shoulders.",
+  "description": "A supported chest and shoulder stretch with the hands on a bench and the trunk hinged forward.",
   "instructions": [
-    "Stand tall with your feet hip-width apart.",
-    "Clasp your hands together behind your back.",
-    "Straighten your arms and lift them gently away from your body.",
-    "Open your chest and pull your shoulder blades together.",
-    "Hold for 20-30 seconds while breathing slowly.",
-    "Release and repeat."
+    "Stand in front of a sturdy bench and place both hands on its top with straight arms.",
+    "Walk your feet back and hinge at the hips so your torso lowers between your arms.",
+    "Let the chest sink gently while keeping your neck relaxed and your knees soft.",
+    "Hold for 20 to 30 seconds, then slowly walk your feet in and stand up."
   ],
   "textSource": "opengym"
 }

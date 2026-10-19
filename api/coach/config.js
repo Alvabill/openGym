@@ -26,7 +26,7 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import { HTTP_PROVIDERS, baseUrlFor } from './core/providers.js';
+import { HTTP_PROVIDERS, baseUrlFor, isGatewayModel, validateGatewayBaseUrl } from './core/providers.js';
 import { MAX_OUTPUT_TOKENS } from './core/adapters/http.js';
 
 const DATA = process.env.DATA_DIR || '/data';
@@ -64,6 +64,14 @@ export const PROVIDERS = {
   codex: {
     label: 'Codex (OpenAI)', runtime: 'Codex CLI',
     apiKeyEnv: 'CODEX_API_KEY', oauthEnv: null, credentialHomeEnv: 'CODEX_HOME'
+  },
+  // A Codex-aware Responses API gateway uses the CLI protocol but its own API key. It must
+  // not inherit the regular Codex provider's refreshable login cache or host configuration.
+  'codex-gateway': {
+    label: 'Codex CLI (custom gateway)', runtime: 'Codex CLI',
+    apiKeyEnv: 'CODEX_GATEWAY_API_KEY', oauthEnv: null,
+    baseUrl: true, defaultBase: null, requiredModel: true,
+    keyPlaceholder: 'Gateway API key'
   },
   // The plain-HTTPS providers — Anthropic, OpenAI, Gemini and any OpenAI-compatible endpoint.
   // Described once in core/providers.js so the phone's picker and this table cannot disagree.
@@ -316,6 +324,9 @@ export function isEnabled() {
 export function isConnected() {
   const cfg = load();
   if (!isEnabled()) return false;
+  if (providerMeta(cfg).baseUrl && !baseUrlFor(cfg.provider, cfg)) return false;
+  if (cfg.provider === 'codex-gateway' && !validateGatewayBaseUrl(baseUrlFor(cfg.provider, cfg)).ok) return false;
+  if (providerMeta(cfg).requiredModel && !isGatewayModel(modelFor(cfg))) return false;
   if (cfg.provider === 'fixture') return true;
   if (cfg.authMode === 'profile') return true;
   const rec = authFor(cfg);
@@ -339,7 +350,9 @@ export function publicConfig() {
 export function jobEnv(jobDir, resolved) {
   const cfg = load();
   const meta = providerMeta(cfg);
-  const env = { PATH: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', HOME: jobDir, TMPDIR: jobDir };
+  // Build a fixed PATH rather than inheriting the API process's environment. Apple Silicon
+  // Homebrew installs the Codex CLI in /opt/homebrew/bin on local development hosts.
+  const env = { PATH: '/opt/homebrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', HOME: jobDir, TMPDIR: jobDir };
   const auth = resolved && resolved.auth;
   if (auth && auth.token) {
     const name = (resolved.type === 'cli-token' || resolved.type === 'oauth') ? meta.oauthEnv

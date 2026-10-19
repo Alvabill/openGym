@@ -1,19 +1,19 @@
 {
   "id": "0807",
-  "name": "suspended reverse crunch",
+  "name": "suspension strap reverse crunch",
   "bodyPart": "waist",
-  "equipment": "body weight",
+  "equipment": "suspension trainer",
   "target": "abs",
   "secondaryMuscles": [
     "hip flexors"
   ],
   "category": "calisthenics",
-  "description": "A hanging reverse crunch, curling the knees and pelvis up toward the chest. It targets the lower abs.",
+  "description": "A reverse crunch from a high plank with the feet in suspension straps, bringing the knees and pelvis toward the chest.",
   "instructions": [
-    "Hang from a pull-up bar with your arms fully extended and your palms facing away from you.",
-    "Engage your core and lift your knees up towards your chest, curling your pelvis towards your ribcage.",
-    "Pause for a moment at the top, then slowly lower your knees back down to the starting position.",
-    "Repeat for the desired number of repetitions."
+    "Put both feet in the suspension straps and set a high plank with your hands below your shoulders.",
+    "Keep your shoulders strong and your hips level before drawing the knees in.",
+    "Brace your abdomen and draw your knees toward your chest, letting the pelvis curl slightly under.",
+    "Pause briefly, then extend the legs back to a straight plank without letting the lower back sag."
   ],
   "textSource": "exercisedb"
 }

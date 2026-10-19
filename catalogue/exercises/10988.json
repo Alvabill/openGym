@@ -11,13 +11,12 @@
     "core"
   ],
   "category": "plyometrics",
-  "description": "Starting kneeling, you jump onto a box holding dumbbells. A very explosive move.",
+  "description": "A kneeling-to-feet jump followed by a box jump while holding light dumbbells at your sides.",
   "instructions": [
-    "Kneel in front of a box holding dumbbells at your sides.",
-    "Swing your arms and drive up to your feet.",
-    "Jump onto the box, landing softly.",
-    "Stand tall.",
-    "Step down carefully and reset to kneeling."
+    "Kneel on a padded surface a short distance from a low box, holding light dumbbells at your sides.",
+    "Keep the dumbbells close to your body and explosively drive your hips to land on both feet in a squat stance.",
+    "Once balanced, jump onto the box and land softly with bent knees.",
+    "Stand tall, step down carefully, and reset to kneeling."
   ],
   "textSource": "opengym"
 }

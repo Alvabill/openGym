@@ -1,6 +1,6 @@
 {
   "id": "3673",
-  "name": "standing pose (form check) front view",
+  "name": "standing pose (form check: incorrect, front view)",
   "bodyPart": "full body",
   "equipment": "body weight",
   "target": "spine",
@@ -9,13 +9,12 @@
     "glutes"
   ],
   "category": "isometric",
-  "description": "A front-view form check showing a correct standing posture.",
+  "description": "A front-view standing posture example marked as incorrect. Use it as a prompt to check your own left-right alignment.",
   "instructions": [
-    "Stand with feet hip width apart.",
-    "Keep your knees soft and hips level.",
-    "Stack your shoulders over your hips.",
-    "Look straight ahead.",
-    "Compare yourself to the correct posture."
+    "Stand facing a mirror with your feet about hip-width apart.",
+    "Check whether your weight is distributed evenly and your knees point in the same direction as your toes.",
+    "Look for level hips and shoulders instead of copying the example marked with a red cross.",
+    "Adjust to a comfortable, balanced stance and breathe normally."
   ],
   "textSource": "opengym"
 }

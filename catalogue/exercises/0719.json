@@ -1,6 +1,6 @@
 {
   "id": "0719",
-  "name": "side stretch crunch",
+  "name": "side plank stretch crunch",
   "bodyPart": "waist",
   "equipment": "body weight",
   "target": "abs",
@@ -9,14 +9,12 @@
     "core"
   ],
   "category": "calisthenics",
-  "description": "A side crunch that combines a side stretch and a contraction. It works the obliques.",
+  "description": "A side-plank crunch that shortens and lengthens the upper side of the trunk while the supporting arm keeps the body lifted.",
   "instructions": [
-    "Lie on your side with your bottom arm extended overhead.",
-    "Place your top hand behind your head.",
-    "Stretch along your side.",
-    "Crunch your top elbow toward your hip.",
-    "Return to the stretch.",
-    "Switch sides."
+    "Set a side plank with one hand directly below the shoulder and your feet stacked or staggered.",
+    "Place your upper hand lightly behind your head and keep the hips lifted.",
+    "Curl the upper elbow toward the upper hip without twisting your support shoulder.",
+    "Lengthen the side of your trunk again, then repeat and switch sides."
   ],
   "textSource": "opengym"
 }

@@ -13,11 +13,10 @@
   "category": "calisthenics",
   "description": "A wall-supported raise of the opposite arm and leg. It trains balance and lower back stability.",
   "instructions": [
-    "Stand facing a wall in a bent over position with your hands on it.",
-    "Brace your core.",
-    "Lift one arm and the opposite leg at the same time.",
-    "Hold for a second without twisting.",
-    "Lower and repeat on the other side."
+    "Stand facing a wall and place both hands on it above shoulder height.",
+    "Brace your trunk and keep one hand supported on the wall.",
+    "Lift the free arm and opposite leg a short distance without twisting your hips or lower back.",
+    "Return to the starting position and switch sides."
   ],
   "textSource": "opengym"
 }

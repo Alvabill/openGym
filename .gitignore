@@ -10,6 +10,7 @@ data/
 .env
 
 # Build output / deps
+.build/
 frontend/dist/
 node_modules/
 *.log

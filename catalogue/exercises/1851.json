@@ -1,23 +1,20 @@
 {
   "id": "1851",
-  "name": "incline push press",
+  "name": "incline push-up on box",
   "bodyPart": "chest",
-  "equipment": "barbell",
+  "equipment": "body weight",
   "target": "pectorals",
   "secondaryMuscles": [
     "triceps",
     "shoulders",
-    "upper chest",
-    "quadriceps"
+    "core"
   ],
-  "category": "strength",
-  "description": "An incline press with a small leg drive that lets you move heavier loads and trains the upper chest and shoulders.",
+  "category": "calisthenics",
+  "description": "A push-up with the hands on a sturdy box. The elevated hands reduce the load while the chest and triceps press the body up.",
   "instructions": [
-    "Set an incline bench and hold the bar at your upper chest.",
-    "Dip slightly through your legs to start momentum.",
-    "Drive the bar up while pressing with your arms.",
-    "Lock out above your chest, then lower under control.",
-    "Keep your core braced and your lower back from arching."
+    "Place your hands on a sturdy box slightly wider than shoulder-width and step your feet back.",
+    "Keep your body straight from head to heels as you bend your elbows and lower your chest toward the box.",
+    "Press through your hands to return to straight arms without letting your hips sag."
   ],
   "textSource": "opengym"
 }

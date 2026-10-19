@@ -1,6 +1,6 @@
 {
   "id": "3331",
-  "name": "oblique crunches with straight leg lift",
+  "name": "side-lying oblique crunch with straight-leg lift",
   "bodyPart": "waist",
   "equipment": "body weight",
   "target": "abs",
@@ -10,13 +10,12 @@
     "hip flexors"
   ],
   "category": "calisthenics",
-  "description": "A twisting crunch with your legs lifted straight, making your core work harder through the lever.",
+  "description": "A side-lying crunch that lifts straight legs while the upper shoulder curls toward the hip.",
   "instructions": [
-    "Lie on your back with legs raised straight and hands by your head.",
-    "Lift your shoulders off the floor.",
-    "Rotate to bring one elbow toward the opposite hip.",
-    "Keep your legs steady and low back pressed down.",
-    "Return slowly and alternate sides."
+    "Lie on one side with your legs straight and stacked, using the lower arm for support.",
+    "Place your upper hand lightly behind your head.",
+    "Lift your legs slightly and curl your upper shoulder toward your hip without yanking your neck.",
+    "Lower with control, then switch sides after the set."
   ],
   "textSource": "opengym"
 }

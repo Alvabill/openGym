@@ -3,6 +3,15 @@
   "appName": "openGym",
   "webDir": "dist",
   "backgroundColor": "#0c0e12",
+  "ios": {
+    "includePlugins": [
+      "@aparajita/capacitor-secure-storage",
+      "@capacitor/app",
+      "@capacitor/filesystem",
+      "@capacitor/local-notifications",
+      "@capacitor/share"
+    ]
+  },
   "android": {
     "allowMixedContent": true
   }

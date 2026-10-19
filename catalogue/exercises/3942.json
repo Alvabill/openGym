@@ -1,6 +1,6 @@
 {
   "id": "3942",
-  "name": "romanian chair sit up v. 2",
+  "name": "roman chair sit-up",
   "bodyPart": "waist",
   "equipment": "body weight",
   "target": "abs",
@@ -9,13 +9,12 @@
     "lower back"
   ],
   "category": "calisthenics",
-  "description": "A sit up done with your legs supported on a chair, which keeps the movement strict. It trains the abs and hip flexors.",
+  "description": "A sit-up on a Roman-chair or decline bench with the feet anchored, working the abs through a controlled trunk curl.",
   "instructions": [
-    "Sit on the floor and rest your lower legs on a chair or bench, knees bent.",
-    "Cross your arms over your chest.",
-    "Curl your torso up until your chest nears your knees.",
-    "Lower slowly back to the floor.",
-    "Do not pull on your neck."
+    "Adjust the bench so your hips are supported and your feet are secured beneath the pads.",
+    "Cross your arms over your chest and lean back under control.",
+    "Curl your trunk up without jerking or pulling on your neck.",
+    "Lower slowly to the starting angle and repeat."
   ],
   "textSource": "opengym"
 }
