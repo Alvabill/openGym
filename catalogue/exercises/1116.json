@@ -1,6 +1,6 @@
 {
   "id": "1116",
-  "name": "suspender incline push up",
+  "name": "suspension decline push-up",
   "bodyPart": "chest",
   "equipment": "suspension trainer",
   "target": "pectorals",
@@ -10,14 +10,12 @@
     "core"
   ],
   "category": "calisthenics",
-  "description": "A push-up with the hands in the straps and the body angled upward, a gentler version that builds the chest.",
+  "description": "A decline push-up with the feet suspended in straps and the hands on the floor, increasing chest and core demand.",
   "instructions": [
-    "Hold the handles and walk your feet back so your body is at a slant.",
-    "Keep your body straight and core tight.",
-    "Lower your chest to the handles by bending the elbows.",
-    "Keep elbows at about 45 degrees.",
-    "Press up to straight arms.",
-    "Walk your feet back to make it harder."
+    "Place both feet in the suspension straps and set your hands on the floor beneath your shoulders.",
+    "Walk your hands forward until your body forms a straight, feet-elevated plank.",
+    "Brace your core and lower your chest toward the floor with your elbows at a comfortable angle.",
+    "Press back up while keeping the straps and hips steady."
   ],
   "textSource": "opengym"
 }

@@ -1,6 +1,6 @@
 {
   "id": "1149",
-  "name": "suspender triceps extension push up",
+  "name": "suspender close grip push up",
   "bodyPart": "upper arms",
   "equipment": "suspension trainer",
   "target": "triceps",
@@ -10,14 +10,11 @@
     "core"
   ],
   "category": "calisthenics",
-  "description": "Lowering your head toward the handles then pushing out, a strap extension that hammers the triceps.",
+  "description": "A close-grip push-up with the feet in suspension straps. The unstable base increases the challenge for the triceps and core.",
   "instructions": [
-    "Hold the handles and lean forward with arms straight.",
-    "Keep your body in a straight line.",
-    "Bend your elbows and lower your forehead between the hands.",
-    "Keep elbows pointing forward.",
-    "Press back up to straight arms.",
-    "Move your feet back for more challenge."
+    "Place your feet in the foot cradles and set a high plank with your hands slightly narrower than shoulder-width.",
+    "Brace your core and bend your elbows close to your ribs to lower your chest.",
+    "Press through your hands to return to straight arms, keeping your body aligned."
   ],
   "textSource": "opengym"
 }

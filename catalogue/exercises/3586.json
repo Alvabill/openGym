@@ -1,6 +1,6 @@
 {
   "id": "3586",
-  "name": "scissors (advanced)",
+  "name": "seated supported scissor kicks",
   "bodyPart": "waist",
   "equipment": "body weight",
   "target": "abs",
@@ -10,13 +10,12 @@
     "obliques"
   ],
   "category": "calisthenics",
-  "description": "Hold both legs low and cross them repeatedly like scissors, working the lower abs.",
+  "description": "Alternating straight-leg kicks from a reclined seated position, challenging the lower abs and hip flexors.",
   "instructions": [
-    "Lie on your back with legs extended and hands under your hips.",
-    "Lift your head, shoulders and legs slightly off the floor.",
-    "Cross one leg over the other in a scissor motion.",
-    "Alternate sides in a controlled rhythm.",
-    "Keep your lower back pressed down."
+    "Sit on the floor and place your hands behind your hips for support.",
+    "Lean back slightly, brace your abdomen and lift both straight legs off the floor.",
+    "Raise one leg while lowering the other, alternating in a controlled scissor rhythm.",
+    "Keep your trunk steady and stop before your lower back strains."
   ],
   "femaleVariant": "2893",
   "textSource": "opengym"

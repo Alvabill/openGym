@@ -23,6 +23,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT = true
 const mocks = vi.hoisted(() => ({
   S: null,
   MOBILE: false,
+  ANDROID: true,
   writes: [],          // { push } per update() call, in order
   sheets: [],          // every openSheet render fn, in order
   camera: null,        // the props the browser CameraScan sheet was handed
@@ -61,7 +62,7 @@ vi.mock('../lib/scan.js', () => ({
   scanCode: (...a) => mocks.scanCode(...a),
   importCodeFromImage: (...a) => mocks.importCodeFromImage(...a),
 }))
-vi.mock('../lib/mobile.js', () => ({ get MOBILE() { return mocks.MOBILE } }))
+vi.mock('../lib/mobile.js', () => ({ get MOBILE() { return mocks.MOBILE }, isAndroid: async () => mocks.ANDROID }))
 // The browser camera sheet is a device surface; capture its props so a test can answer as the
 // camera would. It renders nothing.
 vi.mock('../components/CameraScan.jsx', () => ({ default: props => { mocks.camera = props; return null } }))
@@ -80,6 +81,7 @@ let host, root, sheetHost, sheetRoot, camHost, camRoot, widthSpy
 beforeEach(() => {
   mocks.S = { gymCards: [], lastGymCardId: null }
   mocks.MOBILE = false
+  mocks.ANDROID = true
   mocks.writes.length = 0
   mocks.sheets.length = 0
   mocks.camera = null
@@ -417,6 +419,15 @@ describe('CheckIn — adding a card', () => {
 
     await tap(sheetBtn('Save card'))
     expect(mocks.S.gymCards[0].value).toBe('WEB-CODE')
+  })
+
+  it('on iOS the scan uses the camera sheet without the ML Kit plugin', async () => {
+    mocks.MOBILE = true
+    mocks.ANDROID = false
+    await openAdd()
+    await tap(sheetBtn('Scan'))
+    expect(mocks.scanCode).not.toHaveBeenCalled()
+    expect(mocks.sheets).toHaveLength(2)
   })
 
   it('the browser camera closes even when what it found cannot be used', async () => {

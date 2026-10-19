@@ -22,11 +22,13 @@ rest of this document applies to you.
 | **OpenAI-compatible endpoint** | plain HTTPS to a URL you give it — Ollama, LM Studio, vLLM, OpenRouter, a gateway of your own | an API key, optional | default |
 | **Claude (Anthropic)** | the Claude Agent SDK, inside the container | a `claude setup-token` | `coach` |
 | **Codex (OpenAI)** | the Codex CLI, inside the container | Codex's own device sign-in | `coach` |
+| **Codex CLI (custom gateway)** | the Codex CLI through a Responses API gateway | a gateway API key | `coach` |
 
 The first four spawn nothing. A job is one HTTPS request from the api process, so there is no
 child process to drop privileges on, no runtime to carry in the image, and nothing to install:
-**they work on the image every instance already has.** The `coach` image, the unprivileged
-`coach` user and the `./coach-auth` mount described further down exist for the last two only.
+**they work on the image every instance already has.** The `coach` image and the unprivileged
+`coach` user are needed for the CLI providers. The `./coach-auth` mount holds the regular
+Codex sign-in cache; the gateway provider uses an encrypted API key instead.
 
 A model on your own LAN is the compatible endpoint with no key: point it at
 `http://ollama.lan:11434` and pick a model from the list it serves. That is the whole
@@ -183,6 +185,30 @@ unprivileged, and which account is being spent.
 > key is shared by every profile under the daily limits. A *personal* credential — a Claude Code
 > setup token — binds to the first profile that spends it and **every other profile is refused**,
 > by design: that is the right behaviour when one person's personal subscription is behind it.
+
+#### Codex through a Responses API gateway
+
+Choose **Codex CLI (custom gateway)** when the gateway requires the native Codex client, rather
+than an OpenAI-compatible Chat Completions request. Build the `coach` image as above, or install
+Codex CLI on the machine running the API for local development. In the admin AI Coach card,
+select that provider, enter the gateway's full API base URL (including its path; for TokenHub,
+`https://tokenhub.tmeoa.com/v1`), its API key, and the exact model ID it serves. Run
+**Test the Coach**, then choose **self-hosted openGym** in the iPhone's AI Coach settings. The
+TokenHub example describes configuration only; this integration has not been tested against a
+live TokenHub account. A remote gateway URL must use HTTPS; loopback HTTP is allowed for local
+tests. The gateway must support Codex's Responses API and streaming behavior;
+a working `/models` list or Chat Completions request does not prove that. This provider has no
+model-list button because Codex gateway model aliases come from the gateway administrator.
+
+The server passes the key to a job-scoped `CODEX_GATEWAY_API_KEY` environment variable. It
+launches the actual `codex exec` CLI with explicit provider overrides, `wire_api="responses"`,
+`--ignore-user-config`, and a read-only sandbox. Its normal login cache and user configuration
+do not determine this route. It does not add a guessed `Version` header or impersonate a Codex User-Agent. The
+CLI supplies its own protocol headers. Each job still runs as the unprivileged `coach` user.
+
+See the [official Codex gateway setup](https://learn.chatgpt.com/docs/enterprise/connect-to-a-gateway)
+and [gateway compatibility requirements](https://learn.chatgpt.com/docs/enterprise/gateway-compatibility)
+for the URL, model alias and server behavior to confirm with your gateway administrator.
 
 ### A debrief of one workout
 

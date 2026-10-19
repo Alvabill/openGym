@@ -78,12 +78,30 @@ describe('a language picked after coach-api.js loaded', () => {
 
   it('reaches the own-key phone lines, with the provider detail still attached', async () => {
     mocks.MOBILE = true
-    mocks.coachLocal = { mode: 'byok' }
+    mocks.coachLocal = { mode: 'byok', provider: 'compatible' }
     await setLang('fr')
     expect(jobErrorText('provider', 'quota exceeded')).toBe(PACKS.fr[EN.BYOK_ERRORS.provider] + '\nquota exceeded')
     // A class the phone has no line of its own for falls back to the shared one, translated too.
     expect(jobErrorText('restart')).toBe(PACKS.fr[EN.JOB_ERRORS.restart])
     expect(jobErrorText(undefined)).toBe(PACKS.fr[EN.BYOK_ERRORS.internal])
+  })
+
+  it('explains a compatible gateway Version refusal in Chinese without hiding its original error', async () => {
+    const refusal = '400 a valid Version request header or native Codex User-Agent is required for gpt-6-sol'
+    mocks.MOBILE = true
+    mocks.coachLocal = { mode: 'byok', provider: 'compatible' }
+    await setLang('zh')
+    const text = jobErrorText('provider', refusal)
+    expect(text).toContain(refusal)
+    expect(text).toContain('自托管服务的 Codex CLI 网关')
+    expect(text).toContain('设置 → AI 教练')
+    expect(jobErrorText('provider', '400 model not found')).toBe(PACKS.zh[EN.BYOK_ERRORS.provider] + '\n400 model not found')
+
+    mocks.coachLocal = { mode: 'byok', provider: 'openai' }
+    expect(jobErrorText('provider', refusal)).toBe(PACKS.zh[EN.BYOK_ERRORS.provider] + '\n' + refusal)
+
+    mocks.coachLocal = { mode: 'server' }
+    expect(jobErrorText('provider', refusal)).toBe(PACKS.zh[EN.JOB_ERRORS.provider])
   })
 })
 

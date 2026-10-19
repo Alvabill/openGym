@@ -151,6 +151,44 @@ test('the compatible endpoint: base URL is validated, a keyless endpoint counts 
   } finally { mock.close(); }
 });
 
+test('Codex gateway accepts a Responses base URL and model but not HTTP extra headers', async () => {
+  fresh();
+  const { call } = harness();
+  let r = await call('POST /api/admin/coach/config', { provider: 'codex-gateway', baseUrl: '', model: 'gpt-6.1-sol' });
+  assert.equal(r.status, 400);
+  r = await call('POST /api/admin/coach/config', { provider: 'codex-gateway', baseUrl: 'https://user:pw@gateway.example.com/v1' });
+  assert.equal(r.status, 400);
+  r = await call('POST /api/admin/coach/config', { provider: 'codex-gateway', baseUrl: 'http://gateway.example.com/v1' });
+  assert.equal(r.status, 400, 'a gateway key cannot be sent over remote plaintext HTTP');
+  r = await call('POST /api/admin/coach/config', { provider: 'codex-gateway', baseUrl: 'https://gateway.example.com/v1/', model: 'gpt-6.1-sol' });
+  assert.equal(r.status, 200);
+  r = await call('GET /api/admin/coach');
+  const meta = r.body.providers.find(p => p.id === 'codex-gateway');
+  assert.equal(meta.baseUrl, true);
+  assert.equal(meta.http, false);
+  assert.equal(meta.apiKey, true);
+  assert.equal(meta.keyOptional, false);
+  assert.equal(meta.requiredModel, true);
+  assert.equal(r.body.baseUrl, 'https://gateway.example.com/v1');
+  assert.equal(r.body.model, 'gpt-6.1-sol');
+  assert.equal(r.body.runtime.needsKey, true);
+  r = await call('POST /api/admin/coach/config', { model: '   ' });
+  assert.equal(r.status, 400, 'whitespace is not a usable Codex model');
+  r = await call('POST /api/admin/coach/config', { model: '' });
+  assert.equal(r.status, 200);
+  const { forcePrivilegeVerdict } = await import('../coach/adapters/spawn.js');
+  forcePrivilegeVerdict({ ok: true, dropped: false, why: 'pinned by the test suite' });
+  try { r = await call('POST /api/admin/coach/test'); }
+  finally { forcePrivilegeVerdict(null); }
+  assert.equal(r.body.ok, false);
+  assert.match(r.body.error, /model name/, 'testRun must not use the CLI default model');
+  r = await call('POST /api/admin/coach/config', { model: 'gpt-6.1-sol' });
+  assert.equal(r.status, 200);
+  r = await call('POST /api/admin/coach/config', { headers: { Version: 'guess' } });
+  assert.equal(r.status, 400, 'the CLI owns its own protocol headers');
+  assert.equal(cfg.load().providerOptions['codex-gateway'].headers, undefined);
+});
+
 test('the disclosure names the provider and the same five categories the payload builds from', async () => {
   fresh({ provider: 'gemini' });
   const { call } = harness();

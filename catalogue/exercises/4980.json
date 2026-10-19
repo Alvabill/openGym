@@ -1,22 +1,20 @@
 {
   "id": "4980",
-  "name": "reverse flutter kick on floor (hand under head) v. 2",
-  "bodyPart": "waist",
+  "name": "prone floor flutter kicks (arms extended)",
+  "bodyPart": "upper legs",
   "equipment": "body weight",
-  "target": "abs",
+  "target": "glutes",
   "secondaryMuscles": [
-    "lower abs",
-    "hip flexors",
-    "quadriceps"
+    "hamstrings",
+    "lower back"
   ],
   "category": "calisthenics",
-  "description": "Alternating small leg kicks while lying on your back with hands under your head. It works the lower abs and hip flexors.",
+  "description": "Small alternating leg lifts while lying face down with the arms extended, mainly working the glutes and the backs of the thighs.",
   "instructions": [
-    "Lie on your back with your hands under your head and legs extended.",
-    "Lift both heels a few inches off the floor and press your lower back down.",
-    "Kick one leg up higher while the other goes down, then switch in a steady rhythm.",
-    "Keep your legs fairly straight and your core tight.",
-    "Stop the set when your lower back starts to arch."
+    "Lie face down with your arms reaching forward and your legs extended behind you.",
+    "Keep your hips in contact with the floor and your neck relaxed.",
+    "Keep the trunk long and lift one straight leg slightly as the other lowers.",
+    "Alternate in small controlled kicks without forcing an arch in the lower back."
   ],
   "textSource": "opengym"
 }

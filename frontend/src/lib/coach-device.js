@@ -14,7 +14,7 @@ const FILE = 'opengym-coach.json'
 
 export const COACH_MODES = ['off', 'server', 'byok']
 
-const DEFAULTS = { mode: 'off', provider: null, model: null, baseUrl: null, handle: null, daily: null, pending: null }
+const DEFAULTS = { mode: 'off', provider: null, model: null, baseUrl: null, headers: null, handle: null, daily: null, pending: null }
 
 let cache = null
 export async function loadCoachDevice() {
@@ -31,7 +31,7 @@ export async function saveCoachDevice(patch) {
   return next
 }
 /** The part of it a UI may show: never the pending proposal, never the handle. */
-export const coachDeviceSettings = d => d ? { mode: d.mode, provider: d.provider, model: d.model, baseUrl: d.baseUrl } : null
+export const coachDeviceSettings = d => d ? { mode: d.mode, provider: d.provider, model: d.model, baseUrl: d.baseUrl, headers: d.headers } : null
 
 // Test seam.
 export function _resetCoachDevice() { cache = null }

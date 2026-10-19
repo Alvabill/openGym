@@ -3,21 +3,19 @@
   "name": "dumbbell lying straight arm press on floor",
   "bodyPart": "chest",
   "equipment": "dumbbell",
-  "target": "pectorals",
+  "target": "serratus anterior",
   "secondaryMuscles": [
-    "triceps",
+    "chest",
     "shoulders",
     "core"
   ],
   "category": "strength",
-  "description": "A floor press with the arms kept straight. It trains the chest and shoulders without a big range of motion.",
+  "description": "A single-arm straight-arm dumbbell press on the floor that trains shoulder blade control and the upper chest.",
   "instructions": [
-    "Lie on the floor with a dumbbell in each hand above your chest.",
-    "Keep your arms straight and your wrists strong.",
-    "Lower your arms slightly and then press back up.",
-    "Squeeze your chest at the top.",
-    "Keep your feet planted and core tight.",
-    "Control the weights through each rep."
+    "Lie on the floor with your knees bent and one dumbbell held straight above your chest; rest the other arm on the floor.",
+    "Keep your working elbow straight and shoulder stable.",
+    "Let the shoulder blade settle toward the floor, then reach the dumbbell upward by moving the shoulder blade without bending the elbow.",
+    "Lower with control, complete the set and switch arms."
   ],
   "textSource": "opengym"
 }

@@ -11,15 +11,13 @@
     "core"
   ],
   "category": "olympic",
-  "description": "An Olympic lift where you dip, drive the bar overhead and catch it in a split stance. It builds explosive power and overhead stability.",
+  "description": "An Olympic jerk in which you dip and drive the bar overhead, then receive it in a deep squat before standing.",
   "instructions": [
-    "Start with the barbell resting on your shoulders, with your feet shoulder-width apart.",
-    "Lower your body into a squat position, keeping your chest up and your knees tracking over your toes.",
-    "As you reach the bottom of the squat, explosively drive through your legs and push the barbell overhead.",
-    "As the barbell reaches its peak, quickly drop into a split position, with one foot forward and one foot back.",
-    "Catch the barbell overhead with your arms fully extended and your back knee slightly touching the ground.",
-    "Stand up from the split position, bringing your feet back together.",
-    "Lower the barbell back to your shoulders and repeat for the desired number of repetitions."
+    "Start with the barbell in the front rack and your feet about shoulder-width apart.",
+    "Make a short, vertical dip by bending your knees while keeping your chest lifted.",
+    "Drive forcefully through your legs to send the bar overhead.",
+    "Move under the bar into a deep squat and lock your arms overhead, with your feet in a squat stance rather than a split stance.",
+    "Stand fully with the bar stable overhead, then lower it safely to the front rack and reset."
   ],
   "muscleMap": {
     "bodyPart": "full body",

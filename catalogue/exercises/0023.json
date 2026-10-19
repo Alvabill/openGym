@@ -1,6 +1,6 @@
 {
   "id": "0023",
-  "name": "barbell alternate biceps curl",
+  "name": "barbell single arm biceps curl",
   "bodyPart": "upper arms",
   "equipment": "barbell",
   "target": "biceps",
@@ -8,14 +8,12 @@
     "forearms"
   ],
   "category": "strength",
-  "description": "A standing curl where the arms lift the bar alternately, keeping tension on the biceps.",
+  "description": "A standing single-arm curl with a short barbell. It trains the biceps and grip control.",
   "instructions": [
-    "Stand up straight with your feet shoulder-width apart and hold a barbell in each hand, palms facing forward.",
-    "Keep your upper arms stationary and exhale as you curl the weights while contracting your biceps.",
-    "Continue to raise the barbells until your biceps are fully contracted and the barbells are at shoulder level.",
-    "Hold the contracted position for a brief pause as you squeeze your biceps.",
-    "Inhale as you slowly begin to lower the barbells back to the starting position.",
-    "Repeat for the desired number of repetitions, alternating arms."
+    "Stand with feet shoulder-width apart and hold a short barbell in one hand, palm facing forward.",
+    "Keep the elbow near your side and curl the barbell toward your shoulder without swinging your torso.",
+    "Pause briefly, then lower the barbell slowly.",
+    "Finish the reps on one side, then switch hands."
   ],
   "textSource": "exercisedb"
 }

@@ -1,6 +1,6 @@
 {
   "id": "10863",
-  "name": "smith seated single arm neutral grip shoulders press",
+  "name": "smith seated two hand shoulder press",
   "bodyPart": "shoulders",
   "equipment": "smith machine",
   "target": "delts",
@@ -10,13 +10,12 @@
     "core"
   ],
   "category": "strength",
-  "description": "A one-arm seated press on the smith machine with a neutral grip. It trains the shoulder while the bar path stays guided.",
+  "description": "A seated, two-handed shoulder press on the Smith machine's fixed bar path.",
   "instructions": [
-    "Set a bench under the smith bar and sit upright with your back supported.",
-    "Hold the bar with one hand in a neutral grip and unhook it.",
-    "Press the bar overhead until your arm is almost straight.",
-    "Lower it slowly to around chin height.",
-    "Keep your torso steady. Finish all reps, then switch arms."
+    "Place a bench beneath the Smith bar and sit upright with your feet planted.",
+    "Take a two-handed overhand grip slightly wider than shoulder width and unhook the bar.",
+    "Press the bar upward along the rails until your arms are nearly straight.",
+    "Lower it under control to around chin or upper-chest height, then repeat and rerack."
   ],
   "textSource": "opengym"
 }

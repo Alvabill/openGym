@@ -3,20 +3,19 @@
   "name": "standing forward slide press with towel",
   "bodyPart": "chest",
   "equipment": "body weight",
-  "target": "pectorals",
+  "target": "serratus anterior",
   "secondaryMuscles": [
     "shoulders",
     "triceps",
     "core"
   ],
   "category": "rehab",
-  "description": "A towel slid forward along a wall that presses the arm out. It builds gentle shoulder control.",
+  "description": "A standing towel slide on a waist- to chest-height surface that gently trains forward shoulder reach and control.",
   "instructions": [
-    "Stand facing a wall and place a towel under your hand against it.",
-    "Keep your elbow bent and the hand at chest height.",
-    "Slide the towel forward as your arm straightens.",
-    "Slide it back slowly.",
-    "Finish your reps, then switch arms."
+    "Stand facing a stable counter or box and place a towel under your hand on its surface.",
+    "Keep your shoulder relaxed and slide the towel forward as your arm reaches out.",
+    "Press lightly into the surface, then slide your hand back under control.",
+    "Finish the set and switch arms."
   ],
   "textSource": "opengym"
 }

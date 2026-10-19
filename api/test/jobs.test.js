@@ -442,7 +442,7 @@ test('the admin test-run completes a round trip without a user to spend', async 
   assert.equal(r.version, 'fixture');
 });
 
-test('a job is refused outright when the privilege drop cannot be performed', () => {
+test('a job and admin test are refused outright when the privilege drop cannot be performed', async () => {
   const uid = 'u-priv';
   writeState(DIR, uid, sampleState());
   // The refusal is the assertion, so it is pinned rather than hoped for: this used to skip
@@ -451,6 +451,9 @@ test('a job is refused outright when the privilege drop cannot be performed', ()
   forcePrivilegeVerdict({ ok: false, dropped: false, why: 'no `coach` user exists in this image' });
   try {
     assert.throws(() => jobs.enqueue(uid, { kind: 'review' }), e => e.code === 'unprivileged');
+    const r = await jobs.testRun();
+    assert.equal(r.ok, false);
+    assert.match(r.error, /Coach jobs are disabled/);
   } finally {
     forcePrivilegeVerdict({ ok: true, dropped: false, why: 'pinned by the test suite' });
   }

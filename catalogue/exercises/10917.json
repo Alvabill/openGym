@@ -1,6 +1,6 @@
 {
   "id": "10917",
-  "name": "seated single leg tibialis press v. 2",
+  "name": "seated single leg tibialis raise v. 2",
   "bodyPart": "lower legs",
   "equipment": "body weight",
   "target": "calves",
@@ -9,13 +9,11 @@
     "ankles"
   ],
   "category": "rehab",
-  "description": "A gentle seated press that engages the shin muscle. Useful for ankle control.",
+  "description": "A seated single-leg dorsiflexion that works the muscle along the front of the shin.",
   "instructions": [
-    "Sit on a chair with one foot flat and the other crossed over it.",
-    "Press the top foot up against the resistance of the bottom foot.",
-    "Feel the front of your shin work.",
-    "Hold for a second.",
-    "Relax and repeat, then switch feet."
+    "Sit upright on a chair with one foot planted and the other leg extended forward.",
+    "Keep the lower leg still and slowly draw the toes of the extended foot toward your shin.",
+    "Pause briefly, release with control, then switch legs after your reps."
   ],
   "textSource": "opengym"
 }

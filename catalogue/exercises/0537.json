@@ -11,11 +11,11 @@
   "category": "olympic",
   "description": "You clean a kettlebell to your shoulder, then dip and drive it overhead with one arm. A full body power move for legs, shoulders and core.",
   "instructions": [
-    "Stand with your feet shoulder-width apart, holding a kettlebell in one hand with an overhand grip.",
-    "Bend your knees slightly and hinge at the hips, lowering the kettlebell between your legs.",
-    "Explosively extend your hips, knees, and ankles, using the momentum to swing the kettlebell up to shoulder height.",
-    "As the kettlebell reaches shoulder height, rotate your wrist and punch your hand straight up, locking out your arm overhead.",
-    "Lower the kettlebell back down to the starting position and repeat for the desired number of repetitions."
+    "Stand with one kettlebell in hand and your feet about shoulder-width apart.",
+    "Hinge and swing the bell back between your legs, then extend your hips to clean it into the rack at your shoulder.",
+    "With the bell settled in the rack, make a short knee dip and drive through your legs to send it upward.",
+    "Move slightly under the bell and lock your arm overhead before standing fully.",
+    "Lower the bell to the rack and reset, then switch arms after the set."
   ],
   "muscleMap": {
     "bodyPart": "full body",

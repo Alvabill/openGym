@@ -10,13 +10,12 @@
     "shoulders"
   ],
   "category": "calisthenics",
-  "description": "A curl done with your own body resistance, such as pushing one hand against the other. It is a simple way to train the biceps without equipment.",
+  "description": "A standing bodyweight curl using secure fixed handles. Leaning back increases resistance as the biceps pull your body toward the handles.",
   "instructions": [
-    "Stand tall with your feet hip-width apart.",
-    "Place one hand under the wrist of your other hand to give resistance.",
-    "Curl the working hand toward your shoulder while the other hand pushes down.",
-    "Squeeze the biceps at the top.",
-    "Lower slowly, finish the reps, then switch arms."
+    "Check that the handles and anchor are secure, then grip the handles with both hands and stand with feet planted.",
+    "Lean back slightly with your torso braced and arms extended in front of you.",
+    "Bend your elbows to pull your body toward the handles.",
+    "Extend your arms slowly to return, adjusting foot position to change difficulty."
   ],
   "textSource": "opengym"
 }

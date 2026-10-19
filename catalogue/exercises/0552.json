@@ -9,13 +9,12 @@
     "forearms"
   ],
   "category": "olympic",
-  "description": "You pull a kettlebell from between your thighs up to the rack position with both hands. Trains hip power, back and shoulders.",
+  "description": "Clean two kettlebells from between the legs into a double rack position, using hip drive rather than pulling with the arms.",
   "instructions": [
-    "Stand with your feet shoulder-width apart, holding a kettlebell in front of your thighs with both hands, palms facing towards you.",
-    "Bend your knees slightly and hinge at the hips, lowering the kettlebell towards the ground.",
-    "Explosively extend your hips and knees, using the momentum to pull the kettlebell up towards your shoulders.",
-    "As the kettlebell reaches shoulder height, rotate your wrists and catch the kettlebell in the rack position, with your elbows tucked in and the kettlebell resting on the back of your forearm.",
-    "Lower the kettlebell back down to the starting position and repeat for the desired number of repetitions."
+    "Stand with a kettlebell in each hand and your feet about shoulder-width apart.",
+    "Hinge at the hips and swing both bells back between your legs while keeping your back neutral.",
+    "Drive through your hips and guide both bells close to your body into the rack position at your shoulders.",
+    "Keep your wrists straight and elbows close, then lower or swing the bells back to reset."
   ],
   "muscleMap": {
     "bodyPart": "full body",

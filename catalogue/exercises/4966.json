@@ -13,12 +13,10 @@
   "category": "olympic",
   "description": "An Olympic style drill where you press yourself down under a barbell overhead. It builds shoulder stability and speed.",
   "instructions": [
-    "Hold a barbell overhead with a wide grip.",
-    "Press up so your arms lock out.",
-    "Drop into a squat while keeping the bar overhead.",
-    "Keep your arms locked.",
-    "Stand up tall.",
-    "Keep your core braced."
+    "Start standing with a light barbell at the front of your shoulders and a grip slightly wider than shoulder width.",
+    "Brace your trunk and press the bar upward as you actively lower your body underneath it.",
+    "Receive the bar overhead with locked arms in a stable squat stance.",
+    "Stand up while keeping the bar overhead, then lower it to the front rack to reset."
   ],
   "textSource": "opengym"
 }

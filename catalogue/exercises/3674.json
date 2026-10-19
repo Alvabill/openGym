@@ -1,6 +1,6 @@
 {
   "id": "3674",
-  "name": "standing pose (form check) side view",
+  "name": "standing pose (form check: incorrect, side view)",
   "bodyPart": "full body",
   "equipment": "body weight",
   "target": "spine",
@@ -9,13 +9,12 @@
     "glutes"
   ],
   "category": "isometric",
-  "description": "A side-view form check showing a correct standing posture.",
+  "description": "A side-view standing posture example marked as incorrect. Use it to check head, rib cage and pelvis alignment.",
   "instructions": [
-    "Stand with feet hip width apart.",
-    "Keep your ears over your shoulders and hips.",
-    "Keep a natural curve in your lower back.",
-    "Relax your arms.",
-    "Compare yourself to the correct posture."
+    "Stand sideways to a mirror with your feet about hip-width apart and knees relaxed.",
+    "Check that your ears, shoulders and hips are roughly stacked, without forcing a perfectly straight back.",
+    "Keep your ribs over your pelvis and avoid copying the posture marked with a red cross.",
+    "Let your arms hang naturally and breathe normally."
   ],
   "textSource": "opengym"
 }

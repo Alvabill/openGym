@@ -1,21 +1,20 @@
 {
   "id": "4768",
-  "name": "incline alternate flutter kicks",
-  "bodyPart": "waist",
+  "name": "prone incline bench alternating flutter kicks",
+  "bodyPart": "upper legs",
   "equipment": "body weight",
-  "target": "abs",
+  "target": "glutes",
   "secondaryMuscles": [
-    "hip flexors",
-    "lower abs"
+    "hamstrings",
+    "lower back"
   ],
   "category": "calisthenics",
-  "description": "Lying on an incline, you alternate straight-leg flutter kicks. It trains the lower abs.",
+  "description": "Small alternating leg lifts while lying face down on an incline bench, mainly working the glutes and the backs of the thighs.",
   "instructions": [
-    "Lie back on an incline bench and hold the edges behind your head.",
-    "Lift your legs a few inches off the floor.",
-    "Kick your legs up and down alternately in small motions.",
-    "Keep your lower back pressed down.",
-    "Continue for the set time or reps."
+    "Lie face down on a stable incline bench with your hips supported and hold the bench securely.",
+    "Extend both legs behind you and keep your trunk steady.",
+    "Lift one leg a short way as the other lowers, then alternate at a controlled pace.",
+    "Avoid swinging the legs or overextending the lower back."
   ],
   "textSource": "opengym"
 }

@@ -17,7 +17,7 @@ vi.mock('./coach-secrets.js', () => ({ getApiKey: async () => secret.key, setApi
 const wire = { calls: [], answer: null }
 vi.mock('./capacitor-fetch.js', () => ({
   nativeFetch: async (url, init) => {
-    wire.calls.push({ url, init, body: JSON.parse(init.body) })
+    wire.calls.push({ url, init, body: init.body ? JSON.parse(init.body) : null })
     const a = typeof wire.answer === 'function' ? wire.answer(wire.calls.length) : wire.answer
     return { ok: a.status < 300, status: a.status, text: async () => JSON.stringify(a.body), json: async () => a.body }
   }
@@ -111,6 +111,29 @@ describe('the Coach on a phone with its own key', () => {
     expect(s.lastError.detail).toMatch(/^404 The model `gpt-4o-mini-tts` does not exist/)
     expect(seen.at(-1)).toMatchObject({ kind: 'failed', errorClass: 'provider', detail: expect.stringMatching(/does not exist/) })
     local.setNotifier(null)
+  })
+
+  it('uses saved non-secret gateway headers for model listing and Coach requests only on the compatible endpoint', async () => {
+    const headers = { version: 'documented-value', 'x-route': 'coach' }
+    wire.answer = { status: 200, body: { data: [{ id: 'gateway-model' }] } }
+    const models = await local.localModels({ provider: 'compatible', baseUrl: 'https://gateway.example.com', headers }, null)
+    expect(models).toEqual({ ok: true, models: ['gateway-model'] })
+    expect(wire.calls[0].url).toBe('https://gateway.example.com/v1/models')
+    expect(wire.calls[0].init.headers).toMatchObject(headers)
+    expect(wire.calls[0].init.headers).not.toHaveProperty('authorization')
+
+    await saveCoachDevice({ provider: 'compatible', model: 'gateway-model', baseUrl: 'https://gateway.example.com', headers })
+    wire.calls = []; wire.answer = chat(JSON.stringify(review))
+    await local.localReview(state()); await settle()
+    expect(wire.calls[0].url).toBe('https://gateway.example.com/v1/chat/completions')
+    expect(wire.calls[0].init.headers).toMatchObject({ ...headers, authorization: 'Bearer sk-test-1' })
+
+    local._resetLocal(); await saveCoachDevice({ pending: null, provider: 'openai', model: 'gpt-t' })
+    wire.calls = []
+    await local.localReview(state()); await settle()
+    expect(wire.calls[0].url).toBe('https://api.openai.com/v1/chat/completions')
+    expect(wire.calls[0].init.headers).not.toHaveProperty('version')
+    expect(wire.calls[0].init.headers).not.toHaveProperty('x-route')
   })
 
   it('a 401 is an auth failure, and never a proposal', async () => {

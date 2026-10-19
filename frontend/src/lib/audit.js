@@ -5,10 +5,9 @@
 // belongs here and not in Admin.jsx: it is the only part of the feature that can be wrong in a way
 // a person sees, and as a plain module it is testable without mounting the dashboard.
 //
-// Like the rest of the admin screen this is English-only — the operator surface deliberately
-// stays out of the per-language string packs (see the header of views/Admin.jsx). Times still
-// follow the UI language, the way numbers and dates already do.
+// Unknown codes remain visible as raw values so a newer server event is not hidden.
 import { dateLocale } from './i18n-core.js'
+import { adminT } from './admin-i18n.js'
 
 // The first segment of an event name is also the filter chip it belongs to.
 export const auditCat = ev => String(ev || '').split('.')[0]
@@ -70,7 +69,7 @@ const LABELS = {
 }
 // An unknown event is shown raw rather than dropped or rendered as "undefined": a dashboard
 // that is one version behind the server should still say *something* truthful.
-export const auditLabel = ev => LABELS[ev] || String(ev || 'Unknown event')
+export const auditLabel = ev => adminT(LABELS[ev] || String(ev || 'Unknown event'))
 
 const REASONS = {
   'challenge-expired': 'the sign-in took too long and expired',
@@ -102,7 +101,7 @@ const REASONS = {
   'upload': 'photo and video uploads',
   'sweep': 'clearing unused photos and videos'
 }
-export const auditReason = msg => REASONS[msg] || (msg ? String(msg) : '')
+export const auditReason = msg => REASONS[msg] ? adminT(REASONS[msg]) : (msg ? String(msg) : '')
 
 // What an `auth.proof.fail` was confirming (the server's `act`).
 const ACTS = {
@@ -114,7 +113,7 @@ const ACTS = {
   'passkey-remove': 'removing a passkey',
   'device-link': 'making a one-time code for another device'
 }
-export const auditAct = act => ACTS[act] || (act ? String(act) : '')
+export const auditAct = act => ACTS[act] ? adminT(ACTS[act]) : (act ? String(act) : '')
 
 // → { title, sub }. `sub` is the house "a · b · c" metadata line used by every list row.
 export function auditLine(e) {
@@ -122,11 +121,11 @@ export function auditLine(e) {
   const parts = []
   if (e.name) parts.push(e.name)
   else if (e.uid) parts.push(e.uid)
-  else if (!e.ok) parts.push('unknown caller')
+  else if (!e.ok) parts.push(adminT('unknown caller'))
   if (e.tname) parts.push('→ ' + e.tname)
   if (e.act) parts.push(auditAct(e.act))
   // The reason codes and the invite codes share the msg field; only failures read as a reason.
-  if (e.msg) parts.push(e.ok ? e.msg : auditReason(e.msg))
+  if (e.msg) parts.push(e.ok ? adminT(e.msg) : auditReason(e.msg))
   if (e.ip) parts.push(e.ip)
   return { title: auditLabel(e.ev), sub: parts.join(' · ') }
 }
@@ -139,7 +138,7 @@ export function fmtWhen(ts, now = Date.now()) {
   const time = d.toLocaleTimeString(dateLocale(), { hour: '2-digit', minute: '2-digit' })
   const n = new Date(now)
   const sameDay = d.toDateString() === n.toDateString()
-  if (sameDay) return 'today ' + time
+  if (sameDay) return adminT('today {0}', time)
   if (now - ts < 6 * 86400000 && ts <= now) return d.toLocaleDateString(dateLocale(), { weekday: 'short' }) + ' ' + time
   return d.toLocaleDateString(dateLocale(), { day: 'numeric', month: 'short' }) + ' ' + time
 }

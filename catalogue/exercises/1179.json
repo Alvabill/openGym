@@ -1,21 +1,20 @@
 {
   "id": "1179",
-  "name": "flutter kicks v. 2",
-  "bodyPart": "waist",
+  "name": "prone bench flutter kicks",
+  "bodyPart": "upper legs",
   "equipment": "body weight",
-  "target": "abs",
+  "target": "glutes",
   "secondaryMuscles": [
-    "lower abs",
-    "hip flexors"
+    "hamstrings",
+    "lower back"
   ],
   "category": "calisthenics",
-  "description": "Small alternating leg kicks that burn the lower abs.",
+  "description": "Alternating small leg lifts while lying face down on a bench. The glutes and the backs of the thighs do most of the work.",
   "instructions": [
-    "Lie on your back with hands under your hips.",
-    "Lift both legs a few inches off the floor.",
-    "Kick your legs up and down in small, quick alternating moves.",
-    "Press your lower back into the floor.",
-    "Continue for 20-40 seconds."
+    "Lie face down on a sturdy bench with your hips supported and your legs extending beyond the end.",
+    "Hold the bench for stability and keep your trunk steady.",
+    "Lift one straight leg slightly as the other lowers, then alternate in small controlled kicks.",
+    "Avoid arching your lower back or swinging the legs high."
   ],
   "femaleVariant": "5734",
   "textSource": "opengym"

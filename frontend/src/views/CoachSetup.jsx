@@ -14,14 +14,16 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore.js'
 import { useUI } from '../store/useUI.js'
 import { t } from '../lib/i18n.js'
+import { coachSetupT } from '../lib/coach-setup-i18n.js'
 import { MOBILE } from '../lib/mobile.js'
 import { CATEGORY_TEXT } from '../lib/coach.js'
 import { getApiKey, setApiKey, clearApiKey } from '../lib/coach-secrets.js'
-import { HTTP_PROVIDERS, HTTP_PROVIDER_IDS, baseUrlFor, validateBaseUrl } from '../../../api/coach/core/providers.js'
+import { HTTP_PROVIDERS, HTTP_PROVIDER_IDS, baseUrlFor, validateBaseUrl, validateHeaders } from '../../../api/coach/core/providers.js'
 import { DATA_CATEGORIES } from '../../../api/coach/core/categories.js'
+import { headersToText, parseHeadersText } from '../lib/coach-headers.js'
 import { ConnectSheet } from './MobileOnboarding.jsx'
 import Icon from '../components/Icon.jsx'
-import { Section, Row, Button, TextField } from '../components/ui.jsx'
+import { Section, Row, Button, TextArea, TextField } from '../components/ui.jsx'
 
 // Literal t() calls, so check-source-strings sees the three lines; t(s) over a list of keys hid them.
 const STEPS = () => [t('Loading the exercise catalogue…'), t('Checking the endpoint…'), t('Ready')]
@@ -48,6 +50,7 @@ export default function CoachSetup() {
   const [choice, setChoice] = useState(null)              // 'server' | 'byok' | null
   const [provider, setProvider] = useState(coachLocal?.provider || 'anthropic')
   const [baseUrl, setBaseUrl] = useState(coachLocal?.baseUrl || '')
+  const [headersText, setHeadersText] = useState(coachLocal?.provider === 'compatible' ? headersToText(coachLocal?.headers) : '')
   const [model, setModel] = useState(coachLocal?.model || '')
   const [key, setKey] = useState('')
   const [hasKey, setHasKey] = useState(false)
@@ -65,6 +68,12 @@ export default function CoachSetup() {
   const host = hostOf(baseUrlFor(provider, { providerOptions: { [provider]: { baseUrl } } }))
   const serverHasCoach = !!(user && config?.coach?.enabled)
 
+  const checkedHeaders = () => {
+    if (provider !== 'compatible') return { ok: true, value: null }
+    const parsed = parseHeadersText(headersText)
+    return parsed.error ? { ok: false, error: parsed.error } : validateHeaders(parsed.headers)
+  }
+
   const useServer = async () => {
     if (!user) return openSheet(close => <ConnectSheet close={close} />)
     await setCoachLocal({ mode: 'server' })
@@ -81,12 +90,14 @@ export default function CoachSetup() {
     if (meta.baseUrl && !meta.defaultBase && !v.value) return toast(t('Enter the endpoint URL'))
     if (isCleartext(v.value)) return toast(cleartextRefused())
     if (!meta.keyOptional && !key.trim() && !hasKey) return toast(t('Enter your API key'))
+    const headers = checkedHeaders()
+    if (!headers.ok) return toast(coachSetupT('Check extra request headers: {0}', headers.error))
     setBusy(true); setStep(0)
     try {
       const local = await import('../lib/coach-local.js')
       setStep(1)
       const k = key.trim() || await getApiKey()
-      const r = await local.localModels({ provider, baseUrl: v.value }, k)
+      const r = await local.localModels({ provider, baseUrl: v.value, ...(provider === 'compatible' ? { headers: headers.value } : {}) }, k)
       if (!r.ok) { setStep(-1); toast(t('Could not reach the provider: {0}', r.error)); return }
       setModels(r.models)
       setStep(2)
@@ -107,12 +118,15 @@ export default function CoachSetup() {
     if (!chosen) return toast(t('Pick a model'))
     // The endpoint can still be edited after the models were listed.
     if (isCleartext(v.value)) return toast(cleartextRefused())
+    const headers = checkedHeaders()
+    if (!headers.ok) return toast(coachSetupT('Check extra request headers: {0}', headers.error))
     setBusy(true)
     try {
       // The mode first, the key second: the settings file is the cheap, reliable write, the
       // key goes through the platform's secure store, which is the step that can misbehave.
       // Either way the user hears what happened instead of watching a greyed-out button (#42).
-      await setCoachLocal({ mode: 'byok', provider, model: chosen, baseUrl: meta.baseUrl ? v.value : null })
+      await setCoachLocal({ mode: 'byok', provider, model: chosen, baseUrl: meta.baseUrl ? v.value : null,
+        headers: provider === 'compatible' ? headers.value : null })
       if (key.trim()) { await setApiKey(key.trim()); setHasKey(true); setKey('') }
       toast(t('The Coach is on'))
       nav('/coach')
@@ -166,6 +180,14 @@ export default function CoachSetup() {
         <div style={{ padding: '8px 12px' }}>
           <TextField value={baseUrl} placeholder="https://ollama.example.com" inputMode="url" autoCapitalize="none" autoCorrect="off"
             onChange={e => setBaseUrl(e.target.value)} />
+        </div>
+      </Section>}
+
+      {provider === 'compatible' && <Section title={coachSetupT('Extra request headers')}
+        footer={coachSetupT('Use only non-secret gateway headers here. Never paste an API key; use the API key field below. If your gateway requires Version, enter the exact value from its documentation.')}>
+        <div style={{ padding: '8px 12px' }}>
+          <TextArea value={headersText} rows={3} placeholder={coachSetupT('Version: value from gateway documentation')}
+            autoCapitalize="none" autoCorrect="off" onChange={e => setHeadersText(e.target.value)} />
         </div>
       </Section>}
 

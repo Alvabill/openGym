@@ -1,6 +1,6 @@
 {
   "id": "5078",
-  "name": "seated chest clam",
+  "name": "kneeling chest clam",
   "bodyPart": "chest",
   "equipment": "body weight",
   "target": "pectorals",
@@ -9,13 +9,12 @@
     "upper back"
   ],
   "category": "stretching",
-  "description": "Sit tall and open your elbows wide like a clam to stretch the front of the chest and shoulders.",
+  "description": "A kneeling chest opener that moves the elbows from in front of the face out to the sides.",
   "instructions": [
-    "Sit tall with your fingers lightly behind your head.",
+    "Kneel upright and rest your fingers lightly behind your head.",
     "Start with your elbows pointing forward.",
-    "Slowly open your elbows out and back as far as is comfortable.",
-    "Squeeze your shoulder blades together.",
-    "Hold for 20-30 seconds while breathing steadily."
+    "Open your elbows out and slightly back as far as is comfortable while gently drawing your shoulder blades together.",
+    "Breathe steadily, then bring the elbows forward and repeat."
   ],
   "femaleVariant": "4946",
   "textSource": "opengym"

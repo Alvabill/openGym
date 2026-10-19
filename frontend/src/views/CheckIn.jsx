@@ -6,7 +6,7 @@ import { uid } from '../lib/format.js'
 import { t } from '../lib/i18n.js'
 import { canRenderFmt } from '../lib/qr.js'
 import { scanCode, importCodeFromImage } from '../lib/scan.js'
-import { MOBILE } from '../lib/mobile.js'
+import { MOBILE, isAndroid } from '../lib/mobile.js'
 import Icon from '../components/Icon.jsx'
 import QrCanvas from '../components/QrCanvas.jsx'
 import CameraScan from '../components/CameraScan.jsx'
@@ -192,11 +192,10 @@ function CardSheet({ close, card }) {
     close()
   }
 
-  // Camera scan: in the app, hands off to the native scanner; in a browser, opens our own camera
-  // sheet on top of this one. Either way the value drops straight into the form so the user can
-  // still name it before saving.
+  // Android hands off to the native scanner. iOS and browsers open our camera sheet.
+  // Either way the value drops into the form so the user can name it before saving.
   const doScan = async () => {
-    if (!MOBILE) {
+    if (!MOBILE || !(await isAndroid())) {
       useUI.getState().openSheet(closeCam => <CameraScan
         onCancel={closeCam}
         onFound={code => {

@@ -114,3 +114,20 @@ export function validateBaseUrl(raw) {
   if (u.search || u.hash) return { ok: false, error: 'a base URL has no query string' };
   return { ok: true, value: u.toString().replace(/\/+$/, '') };
 }
+
+/** A gateway key must not leave over plaintext HTTP. Loopback is useful for a local probe. */
+export function validateGatewayBaseUrl(raw) {
+  const checked = validateBaseUrl(raw);
+  if (!checked.ok || !checked.value) return checked;
+  const u = new URL(checked.value);
+  if (u.protocol !== 'https:' && !['localhost', '127.0.0.1', '[::1]'].includes(u.hostname)) {
+    return { ok: false, error: 'Codex gateway requires HTTPS (HTTP is allowed only on loopback for local testing)' };
+  }
+  return checked;
+}
+
+/** A Codex model alias is one CLI argument; option-like names and whitespace are invalid. */
+export function isGatewayModel(raw) {
+  return typeof raw === 'string' && !!raw.trim() && !raw.trim().startsWith('-')
+    && !/[\s\x00-\x1f]/.test(raw.trim());
+}

@@ -10,7 +10,7 @@ import { computeCohort } from './cohort.js';
 import { adapterFor } from './adapters/index.js';
 import { canDropPrivileges } from './adapters/spawn.js';
 import { DATA_CATEGORIES } from './core/payload.js';
-import { validateBaseUrl, validateHeaders, baseUrlFor } from './core/providers.js';
+import { validateBaseUrl, validateGatewayBaseUrl, validateHeaders, isGatewayModel, baseUrlFor } from './core/providers.js';
 
 // Job failures the user sees, in the app's own voice. The raw provider detail never reaches
 // them — it goes to the admin card, which is where someone can act on it (FR-47).
@@ -146,7 +146,8 @@ export function coachRoutes({ json, readBody, readSession, requireAdmin }) {
       const adapter = adapterFor(cfg.provider);
       // For the runtime-backed providers this asks "is the runtime there"; for an HTTPS one it
       // lists the models with the stored key, which is the round trip the card wants anyway.
-      const cred = adapter?.spawns === false ? cfgStore.credentialFor(cfgStore.boundUidFor(cfg)) : undefined;
+      const cred = adapter?.spawns === false || cfg.provider === 'codex-gateway'
+        ? cfgStore.credentialFor(cfgStore.boundUidFor(cfg)) : undefined;
       const check = adapter ? await adapter.check(cfg, cfgStore.jobEnv(process.env.TMPDIR || '/tmp', cred?.ok ? cred : undefined)) : { ok: false, error: 'unknown provider' };
       const log = cfg.log || [];
       const today = new Date().toISOString().slice(0, 10);
@@ -157,14 +158,15 @@ export function coachRoutes({ json, readBody, readSession, requireAdmin }) {
         providers: Object.entries(cfgStore.PROVIDERS).map(([id, p]) => ({
           id, label: p.label, runtime: p.runtime,
           setupToken: !!p.setupToken, deviceLogin: !!p.deviceLogin, apiKey: !!p.apiKeyEnv,
-          http: !!p.http, baseUrl: !!p.baseUrl, keyOptional: !!p.keyOptional, keyPlaceholder: p.keyPlaceholder || null,
+          http: !!p.http, baseUrl: !!p.baseUrl, keyOptional: !!p.keyOptional, requiredModel: !!p.requiredModel,
+          keyPlaceholder: p.keyPlaceholder || null,
           defaultModel: p.defaultModel || null,
           // Which providers already hold a key — so switching chips is visibly not a reset.
           connected: !!(cfgStore.authFor(cfg, id) && cfgStore.authFor(cfg, id).data)
         })),
         model: cfgStore.modelFor(cfg),
         models: cfg.models,
-        baseUrl: cfgStore.providerMeta(cfg).http ? baseUrlFor(cfg.provider, cfg) : null,
+        baseUrl: cfgStore.providerMeta(cfg).baseUrl ? baseUrlFor(cfg.provider, cfg) : null,
         // Extra static headers this endpoint is called with (compatible endpoints only).
         // Values, not just names: the admin wrote them and needs to see them to edit them.
         // Plaintext next to baseUrl — routing aids, not credentials (the key stays encrypted).
@@ -218,12 +220,15 @@ export function coachRoutes({ json, readBody, readSession, requireAdmin }) {
       }
       const target = patch.provider || current.provider;
       if (body.model !== undefined) {
+        if (target === 'codex-gateway' && body.model && !isGatewayModel(body.model)) {
+          return json(res, 400, { error: 'enter a valid Codex gateway model name' });
+        }
         patch.models = { ...current.models };
-        if (body.model) patch.models[target] = String(body.model).slice(0, 80); else delete patch.models[target];
+        if (body.model) patch.models[target] = String(body.model).trim().slice(0, 80); else delete patch.models[target];
       }
       if (body.baseUrl !== undefined) {
         if (!cfgStore.PROVIDERS[target].baseUrl) return json(res, 400, { error: `${target} has a fixed endpoint` });
-        const v = validateBaseUrl(body.baseUrl);
+        const v = target === 'codex-gateway' ? validateGatewayBaseUrl(body.baseUrl) : validateBaseUrl(body.baseUrl);
         if (!v.ok) return json(res, 400, { error: v.error });
         // An empty value passes the validator on purpose: for a provider with a default it means
         // "back to the default". A provider with none (compatible) would be saved pointing at ''
@@ -233,7 +238,7 @@ export function coachRoutes({ json, readBody, readSession, requireAdmin }) {
         patch.providerOptions = { ...current.providerOptions, [target]: { ...(current.providerOptions[target] || {}), baseUrl: v.value } };
       }
       if (body.headers !== undefined) {
-        if (!cfgStore.PROVIDERS[target].baseUrl) return json(res, 400, { error: `${target} has a fixed endpoint` });
+        if (target !== 'compatible') return json(res, 400, { error: `${target} does not accept custom HTTP headers` });
         const h = validateHeaders(body.headers);
         if (!h.ok) return json(res, 400, { error: h.error });
         // Build on the patch, not on current: a body carrying baseUrl AND headers must keep both.

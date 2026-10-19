@@ -10,13 +10,12 @@
     "upper back"
   ],
   "category": "strength",
-  "description": "A rear fly using crossed cables on an incline bench. It targets the rear delts.",
+  "description": "A crossed-cable rear-delt fly performed while leaning back against an incline bench.",
   "instructions": [
-    "Lie chest down on an incline bench between two cables, holding opposite handles.",
-    "Keep elbows slightly bent.",
-    "Pull your arms out and back.",
-    "Pause.",
-    "Return slowly."
+    "Set an incline bench between the cable stacks and sit with your back supported by the bench.",
+    "Take the opposite cable handle in each hand so the cables cross in front of you.",
+    "With elbows softly bent, pull the arms apart and back to the sides, squeezing the rear shoulders.",
+    "Return the handles slowly to the crossed start position."
   ],
   "textSource": "opengym"
 }

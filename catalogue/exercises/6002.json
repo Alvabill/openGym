@@ -1,6 +1,6 @@
 {
   "id": "6002",
-  "name": "lying toe tap",
+  "name": "lying straight-leg toe tap",
   "bodyPart": "waist",
   "equipment": "body weight",
   "target": "abs",
@@ -9,13 +9,12 @@
     "hip flexors"
   ],
   "category": "calisthenics",
-  "description": "From a tabletop position, alternate lowering a foot to tap the floor while keeping the lower back steady.",
+  "description": "A supine core drill that alternately lowers a straight leg toward the floor while the other leg stays raised.",
   "instructions": [
-    "Lie on your back with your knees bent at 90 degrees over your hips.",
-    "Press your lower back into the floor.",
-    "Lower one foot to tap the floor.",
-    "Bring it back to tabletop.",
-    "Alternate legs with control."
+    "Lie on your back with both legs straight and lifted off the floor.",
+    "Keep your shoulders relaxed and your lower back gently pressed toward the floor.",
+    "Brace your abdomen and lower one leg until its toes lightly touch or nearly touch the floor.",
+    "Lift it back up as the other leg lowers, alternating without arching your lower back."
   ],
   "femaleVariant": "6003",
   "textSource": "opengym"
