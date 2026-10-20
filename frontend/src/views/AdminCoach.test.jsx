@@ -65,7 +65,7 @@ const PROVIDERS = [
   { id: 'openai', label: 'OpenAI', runtime: false, setupToken: false, deviceLogin: false, apiKey: true, http: true, baseUrl: false, keyOptional: false, keyPlaceholder: 'sk-…', defaultModel: 'gpt-4o', connected: false },
   { id: 'compatible', label: 'OpenAI-compatible', runtime: false, setupToken: false, deviceLogin: false, apiKey: true, http: true, baseUrl: true, keyOptional: true, keyPlaceholder: null, defaultModel: null, connected: false },
   { id: 'claude', label: 'Claude Code', runtime: true, setupToken: true, deviceLogin: false, apiKey: false, http: false, baseUrl: false, keyOptional: false, keyPlaceholder: null, defaultModel: null, connected: false },
-  { id: 'codex-gateway', label: 'Codex CLI (custom gateway)', runtime: true, setupToken: false, deviceLogin: false, apiKey: true, http: false, baseUrl: true, keyOptional: false, keyPlaceholder: 'gateway key', defaultModel: null, connected: false },
+  { id: 'codex-gateway', label: 'Codex CLI (custom gateway)', runtime: true, setupToken: false, deviceLogin: false, apiKey: true, http: false, listModels: true, baseUrl: true, keyOptional: false, requiredModel: true, keyPlaceholder: 'gateway key', defaultModel: null, connected: false },
   { id: 'fixture', label: 'Built-in fixture', runtime: false, setupToken: false, deviceLogin: false, apiKey: false, http: false, baseUrl: false, keyOptional: false, keyPlaceholder: null, defaultModel: null, connected: false },
 ]
 
@@ -458,6 +458,34 @@ describe('AdminCoach — model', () => {
     ])
     expect(mocks.toast).toHaveBeenCalledWith('3 models')
     expect([...host.querySelector('select.adm-select').options].map(o => o.value)).toEqual(['', 'm1', 'm2', 'm3'])
+  })
+
+  it('Codex gateway offers its live model list while preserving a previously typed ID', async () => {
+    mocks.routes['/api/admin/coach'] = status({
+      provider: 'codex-gateway', baseUrl: 'https://gateway.example.com/v1',
+      model: 'gpt-6-sol', models: { 'codex-gateway': 'gpt-6-sol' },
+      knownModels: ['GPT-6-Sol', 'GPT-6.1-Sol'],
+    })
+    await mount()
+    const select = host.querySelector('select.adm-select')
+    expect(select.value).toBe('gpt-6-sol')
+    expect([...select.options].map(o => o.value)).toEqual(['', 'gpt-6-sol', 'GPT-6-Sol', 'GPT-6.1-Sol'])
+    expect(btn('Refresh list')).toBeTruthy()
+    await pick(select, 'GPT-6.1-Sol')
+    expect(sent('/api/admin/coach/config').at(-1).body).toEqual({ model: 'GPT-6.1-Sol' })
+  })
+
+  it('Codex gateway offers model discovery first and keeps manual entry as a fallback', async () => {
+    mocks.routes['/api/admin/coach'] = status({
+      provider: 'codex-gateway', baseUrl: 'https://gateway.example.com/v1',
+      model: null, models: {}, knownModels: null,
+    })
+    mocks.routes['/api/admin/coach/models'] = { ok: true, models: ['GPT-6-Sol', 'GPT-6.1-Sol'] }
+    await mount()
+    expect(btn('List models')).toBeTruthy()
+    expect(host.querySelector('details').open).toBe(false)
+    await tap(btn('List models'))
+    expect([...host.querySelector('select.adm-select').options].map(o => o.value)).toEqual(['', 'GPT-6-Sol', 'GPT-6.1-Sol'])
   })
 
   it('a refused list keeps the free-text box and shows the provider\'s reason, never an empty dropdown', async () => {
