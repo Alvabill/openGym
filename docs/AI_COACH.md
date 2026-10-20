@@ -192,13 +192,14 @@ Choose **Codex CLI (custom gateway)** when the gateway requires the native Codex
 than an OpenAI-compatible Chat Completions request. Build the `coach` image as above, or install
 Codex CLI on the machine running the API for local development. In the admin AI Coach card,
 select that provider, enter the gateway's full API base URL (including its path; for TokenHub,
-`https://tokenhub.tmeoa.com/v1`), its API key, and the exact model ID it serves. Run
+`https://tokenhub.tmeoa.com/v1`), and its API key. **List models** reads the gateway's
+`/v1/models` endpoint; choose the exact ID it returns. If the gateway does not serve a model
+list, expand **Enter a model ID manually** and use the ID its administrator supplied. Run
 **Test the Coach**, then choose **self-hosted openGym** in the iPhone's AI Coach settings. The
-TokenHub example describes configuration only; this integration has not been tested against a
-live TokenHub account. A remote gateway URL must use HTTPS; loopback HTTP is allowed for local
+TokenHub example describes configuration; use the test to verify Responses streaming with your
+account. A remote gateway URL must use HTTPS; loopback HTTP is allowed for local
 tests. The gateway must support Codex's Responses API and streaming behavior;
-a working `/models` list or Chat Completions request does not prove that. This provider has no
-model-list button because Codex gateway model aliases come from the gateway administrator.
+a working `/models` list or Chat Completions request does not prove that.
 
 The server passes the key to a job-scoped `CODEX_GATEWAY_API_KEY` environment variable. It
 launches the actual `codex exec` CLI with explicit provider overrides, `wire_api="responses"`,

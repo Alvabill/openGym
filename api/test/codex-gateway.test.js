@@ -52,6 +52,40 @@ test('gateway configuration requires a URL, model, and API key before invoking C
   assert.match(r.stderr, /model name/);
 });
 
+test('Codex gateway lists its own model IDs with the stored key', async () => {
+  const adapter = adapterFor('codex-gateway');
+  let calls = 0;
+  const result = await adapter.models(config, { CODEX_GATEWAY_API_KEY: 'dummy-secret' }, {
+    fetch: async (url, init) => {
+      calls++;
+      assert.equal(url, URL + '/models');
+      assert.equal(init.method, 'GET');
+      assert.equal(init.headers.authorization, 'Bearer dummy-secret');
+      return new Response(JSON.stringify({ data: [
+        { id: 'GPT-6-Sol' }, { id: 'GPT-6.1-Sol' }, { id: 'GPT-6-Sol' }, { id: '--invalid' }
+      ] }), { status: 200 });
+    }
+  });
+  assert.equal(calls, 1);
+  assert.deepEqual(result, { ok: true, models: ['GPT-6-Sol', 'GPT-6.1-Sol'] });
+});
+
+test('Codex gateway model listing refuses missing credentials and reports provider errors', async () => {
+  const adapter = adapterFor('codex-gateway');
+  const unused = async () => { throw new Error('request should not leave'); };
+  const withoutKey = await adapter.models(config, {}, { fetch: unused });
+  assert.equal(withoutKey.ok, false);
+  assert.match(withoutKey.error, /API key/);
+  const plaintext = await adapter.models({ ...config, providerOptions: { 'codex-gateway': { baseUrl: 'http://gateway.example.com/v1' } } },
+    { CODEX_GATEWAY_API_KEY: 'dummy-secret' }, { fetch: unused });
+  assert.equal(plaintext.ok, false);
+  assert.match(plaintext.error, /HTTPS/);
+  const denied = await adapter.models(config, { CODEX_GATEWAY_API_KEY: 'dummy-secret' }, {
+    fetch: async () => new Response(JSON.stringify({ error: { message: 'invalid key' } }), { status: 401 })
+  });
+  assert.deepEqual(denied, { ok: false, error: '401 invalid key', models: [] });
+});
+
 test('gateway key is scoped to this provider and it cannot inherit the Codex login cache', () => {
   cfg.reset();
   cfg.save({ enabled: true, provider: 'codex-gateway', auth: {}, models: {}, providerOptions: {}, boundUid: {} });

@@ -159,6 +159,7 @@ export function coachRoutes({ json, readBody, readSession, requireAdmin }) {
           id, label: p.label, runtime: p.runtime,
           setupToken: !!p.setupToken, deviceLogin: !!p.deviceLogin, apiKey: !!p.apiKeyEnv,
           http: !!p.http, baseUrl: !!p.baseUrl, keyOptional: !!p.keyOptional, requiredModel: !!p.requiredModel,
+          listModels: typeof adapterFor(id)?.models === 'function',
           keyPlaceholder: p.keyPlaceholder || null,
           defaultModel: p.defaultModel || null,
           // Which providers already hold a key — so switching chips is visibly not a reset.
@@ -276,7 +277,7 @@ export function coachRoutes({ json, readBody, readSession, requireAdmin }) {
     },
 
     /* The models the configured endpoint serves, so the card can offer a list rather than a
-       text field that goes stale with every model release. HTTPS providers only. */
+       text field that goes stale with every model release. */
     'POST /api/admin/coach/models': async (req, res) => {
       if (!requireAdmin(req, res)) return;
       const cfg = cfgStore.load();

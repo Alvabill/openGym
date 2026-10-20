@@ -102,6 +102,7 @@ export default function AdminCoach() {
   </div>
 
   const meta = d.providers.find(p => p.id === d.provider) || {}
+  const canListModels = !!(meta.listModels || meta.http)
   const authState = d.auth?.state
   const authed = authState === 'connected' || authState === 'not-required' || authState === 'optional'
   const needsEndpoint = !!meta.baseUrl
@@ -253,7 +254,7 @@ export default function AdminCoach() {
       {/* ---------- model ---------- */}
       <Step n={num()} title={adminT('Model')} hint={d.model || (meta.defaultModel ? adminT('default: {0}', meta.defaultModel) : adminT('not chosen yet'))} done={step4Done} {...stepAt()}>
         <div className="adm-hint">{meta.requiredModel
-          ? adminT('Enter the exact model ID provided by your Codex gateway administrator. This gateway requires a model before the Coach can run.')
+          ? adminT('Choose a model from your Codex gateway. The Coach needs a model to run.')
           : meta.http
           ? adminT('Which model the provider should use. "List models" asks the provider for its current list, so nothing here goes stale.')
           : adminT("Optional. Leave it empty to use the runtime's own default.")}</div>
@@ -265,10 +266,19 @@ export default function AdminCoach() {
               {chosenModel && !models.includes(chosenModel) && <option value={chosenModel}>{adminT('{0} (not in the list)', chosenModel)}</option>}
               {models.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
+            : meta.requiredModel && canListModels
+              ? <div>
+                <div className="adm-hint">{adminT('Use “List models” to choose from this gateway.')}</div>
+                <details style={{ marginTop: 8 }}>
+                  <summary className="adm-hint" style={{ cursor: 'pointer' }}>{adminT('Enter a model ID manually')}</summary>
+                  <TextField key={d.provider} defaultValue={chosenModel} placeholder={adminT('e.g. gpt-6.1-sol')}
+                    onBlur={e => e.target.value !== chosenModel && patch({ model: e.target.value })} />
+                </details>
+              </div>
             : <TextField key={d.provider} defaultValue={chosenModel} placeholder={meta.defaultModel ? adminT('Default: {0}', meta.defaultModel) : meta.requiredModel ? adminT('e.g. gpt-6.1-sol') : needsEndpoint ? adminT('e.g. qwen2.5:3b, or press "List models"') : adminT('(runtime default)')}
               onBlur={e => e.target.value !== chosenModel && patch({ model: e.target.value })} />}
         </div>
-        {meta.http && <div className="adm-actions">
+        {canListModels && <div className="adm-actions">
           <Button size="sm" variant="tinted" icon="reset" disabled={busy} onClick={loadModels}>{models ? adminT('Refresh list') : adminT('List models')}</Button>
           {models && models.length ? <span className="dim small" style={{ alignSelf: 'center' }}>{adminT('{0} served by the provider', models.length)}</span> : null}
         </div>}
